@@ -29,6 +29,7 @@
     "@mantine/tiptap": "^9.5.2",
     "@preact/signals-react": "^3.5.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.112.3",
     "@tiptap/extension-link": "^3.30.3",
     "@tiptap/pm": "^3.30.3",
     "@tiptap/react": "^3.30.3",
@@ -64,6 +65,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.8",
+    "@supabase/ssr": "^0.12.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
