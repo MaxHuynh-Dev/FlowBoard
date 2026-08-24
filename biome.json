@@ -47,8 +47,7 @@
   },
   "css": {
     "parser": {
-      "allowWrongLineComments": false,
-      "tailwindDirectives": true
+      "allowWrongLineComments": false
     }
   },
   "vcs": {

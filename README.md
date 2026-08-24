@@ -10,7 +10,7 @@ Dự án này là một bộ khung (template) phát triển web hiện đại d�
 - **Ngôn ngữ chính**: TypeScript
 
 ### Giao Diện & Styling
-- **CSS Framework**: Tailwind CSS v4 + PostCSS
+- **Styling**: CSS + PostCSS
 - **Components Base**: Radix UI Primitives (thông qua kiến trúc `shadcn/ui`)
 - **Quản lý Theme**: `next-themes` (Hỗ trợ Dark/Light mode)
 - **Icons**: `lucide-react`
@@ -48,7 +48,7 @@ Dự án áp dụng kiến trúc tách bạch rõ ràng giữa thư mục cấu 
 │   ├── enums/            # Liệt kê các bộ Typescript Enums chuẩn hóa
 │   ├── hooks/            # Các Custom Hook (tái sử dụng logic React)
 │   ├── layout/           # Các cấu trúc hiển thị Layout cho Page (Header, Footer, MainLayout...)
-│   ├── lib/              # Những hàm utils dùng chung của thư viện bên ngoài (tạo cn cho Tailwind...)
+│   ├── lib/              # Những hàm utils dùng chung của thư viện bên ngoài
 │   ├── modules/          # Chứa các trang giao diện (Ví dụ cụm HomePage chứa toàn bộ logic Landing)
 │   ├── styles/           # CSS Settings, Variables css tổng, cấu hình cho font hoặc body
 │   ├── types/            # Khai báo các đối tượng Type/Interface cho TypeScript
@@ -56,7 +56,6 @@ Dự án áp dụng kiến trúc tách bạch rõ ràng giữa thư mục cấu 
 ├── .husky/               # Cấu hình chạy Git hooks bắt buộc khi commit code
 ├── biome.json            # Cấu hình rules và formatting cho Biome Linter
 ├── next.config.ts        # File tinh chỉnh hệ thống build và server của Next.js
-├── tailwind.config.ts    # File quản lý theme (colors, fonts, animation) của Tailwind CSS
 └── package.json          # Quản lý libraries, version và các câu lệnh scripts
 ```
 

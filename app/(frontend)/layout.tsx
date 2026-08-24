@@ -1,9 +1,10 @@
-import '@Styles/global.css';
+import '@mantine/core/styles.css';
 
 import { inter, raleway } from '@Constants/fonts';
 import { DEFAULT_METADATA } from '@Constants/metadata';
 import MainLayout from '@Layout/MainLayout';
 import { uiHelper } from '@Utils/uiHelper';
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import type React from 'react';
@@ -16,8 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html lang="en">
+    <html lang="en" {...mantineHtmlProps}>
       <head>
+        <ColorSchemeScript />
+
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for scroll restoration control
           dangerouslySetInnerHTML={{
