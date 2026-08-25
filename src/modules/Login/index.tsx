@@ -3,22 +3,39 @@
 import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@mantine/core';
 import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
-import { useRef, useState } from 'react';
+import { useActionState, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import styles from './Login.module.scss';
 
 type OAuthProvider = 'google' | 'github';
+type LoginActionState = { error: string | null };
+
+const initialLoginState: LoginActionState = { error: null };
 
 export default function Login(): React.ReactElement {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
   const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
-  const [emailLoading, setEmailLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [oauthError, setOauthError] = useState<string | null>(null);
+
+  const [loginState, loginAction, emailLoading] = useActionState(
+    async (_previousState: LoginActionState, formData: FormData): Promise<LoginActionState> => {
+      setOauthError(null);
+      const email = String(formData.get('email') ?? '');
+      const password = String(formData.get('password') ?? '');
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (authError) {
+        return { error: authError.message };
+      }
+
+      window.location.assign('/dashboard');
+      return { error: null };
+    },
+    initialLoginState
+  );
 
   const signInWithProvider = async (provider: OAuthProvider): Promise<void> => {
-    setError(null);
+    setOauthError(null);
     setLoadingProvider(provider);
 
     const supabase = createClient();
@@ -30,26 +47,9 @@ export default function Login(): React.ReactElement {
     });
 
     if (authError) {
-      setError(authError.message);
+      setOauthError(authError.message);
       setLoadingProvider(null);
     }
-  };
-
-  const signInWithEmail = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-    setError(null);
-    setEmailLoading(true);
-    const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email: emailRef.current?.value || '',
-      password: passwordRef.current?.value || ''
-    });
-    if (authError) {
-      setError(authError.message);
-    } else {
-      window.location.assign('/dashboard');
-    }
-    setEmailLoading(false);
   };
 
   return (
@@ -123,9 +123,9 @@ export default function Login(): React.ReactElement {
 
           <Divider label="or continue with email" labelPosition="center" mb="lg" />
 
-          <form className={styles.form} onSubmit={signInWithEmail}>
+          <form action={loginAction} className={styles.form}>
             <TextInput
-              ref={emailRef}
+              name="email"
               label="Email address"
               classNames={{ input: styles.input, label: styles.label }}
               placeholder="you@example.com"
@@ -133,7 +133,7 @@ export default function Login(): React.ReactElement {
               type="email"
             />
             <PasswordInput
-              ref={passwordRef}
+              name="password"
               label="Password"
               classNames={{ input: styles.input, label: styles.label }}
               placeholder="Your password"
@@ -152,7 +152,9 @@ export default function Login(): React.ReactElement {
                 Sign in
               </Button>
             </div>
-            {error ? <div className={styles.error}>{error}</div> : null}
+            {loginState.error || oauthError ? (
+              <div className={styles.error}>{loginState.error ?? oauthError}</div>
+            ) : null}
           </form>
 
           <div className={styles.signup}>

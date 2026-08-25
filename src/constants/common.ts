@@ -1,17 +1,16 @@
-export const APP_NAME = 'Alex Nguyen';
-export const APP_TITLE_TEMPLATE = '%s | Creative Front-End Developer';
-export const DOMAIN_URL = 'https://alexnguyen.dev';
+export const APP_NAME = 'FlowBoard';
+export const APP_TITLE_TEMPLATE = '%s | FlowBoard';
+export const DOMAIN_URL = 'https://flow-board-tau-two.vercel.app';
 export const APP_DESCRIPTION =
-  'Alex Nguyen - Creative Front-End Developer & UI Engineer. Crafting immersive web experiences with Next.js, GSAP, and Framer Motion.';
+  'FlowBoard is a focused workspace for planning projects, organizing tasks, and keeping teams moving forward.';
 export const APP_KEYWORDS = [
-  'Creative Developer',
-  'Front-End Developer',
-  'UI Engineer',
-  'Next.js Portfolio',
-  'GSAP Animation',
-  'Framer Motion',
-  'Web Development',
-  'React Developer'
+  'project management',
+  'task management',
+  'team collaboration',
+  'project planning',
+  'team workspace',
+  'productivity',
+  'FlowBoard'
 ];
-export const EMAIL_CONTACT = 'hello@alexnguyen.dev';
-export const APP_OG_IMAGE = '/images/og-image.png';
+export const EMAIL_CONTACT = 'support@flowboard.app';
+export const APP_OG_IMAGE = '/images/logo.png';
