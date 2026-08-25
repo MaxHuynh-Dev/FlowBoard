@@ -158,7 +158,7 @@ export default function Login(): React.ReactElement {
           </form>
 
           <div className={styles.signup}>
-            Don&apos;t have an account? <Anchor href="/signup">Create one</Anchor>
+            Don&apos;t have an account? <Anchor href="/sign-up">Create one</Anchor>
           </div>
         </Paper>
       </div>

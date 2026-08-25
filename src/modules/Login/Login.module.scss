@@ -254,11 +254,6 @@
   border-radius: 7px;
 }
 
-.input:focus {
-  //   border-color: #86a92e;
-  //   box-shadow: 0 0 0 2px rgba(216, 243, 106, 0.4);
-}
-
 .formActions {
   display: flex;
   align-items: center;
@@ -273,6 +268,15 @@
   font-size: 13px;
   background: rgba(244, 63, 94, 0.12);
   border: 1px solid rgba(244, 63, 94, 0.32);
+  border-radius: 6px;
+}
+
+.success {
+  padding: 10px 12px;
+  color: #315e3b;
+  font-size: 13px;
+  background: #eef8e7;
+  border: 1px solid #cde6bd;
   border-radius: 6px;
 }
 
