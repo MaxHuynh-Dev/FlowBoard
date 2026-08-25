@@ -4,6 +4,7 @@ import type { NextConfig } from 'next';
 
 const isProd = process.env.NEXT_PUBLIC_APP_ENV === PROD_ENV;
 const baseConfig: NextConfig = {
+  turbopack: {},
   reactStrictMode: true,
   images: {
     minimumCacheTTL: 3600,
