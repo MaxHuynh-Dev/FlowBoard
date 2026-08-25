@@ -40,8 +40,7 @@
   border-radius: 8px;
 }
 
-.workspaceLabel,
-.footer {
+.workspaceLabel {
   color: var(--muted-foreground);
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -114,9 +113,72 @@
   transform: rotate(90deg);
 }
 
-.footer {
-  padding: 20px 12px 0;
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
   margin-top: auto;
+  color: var(--foreground);
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.user:hover,
+.user:focus-visible {
+  background: var(--sidebar-accent);
+  border-color: var(--sidebar-border);
+  outline: none;
+}
+
+.avatar {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--primary-foreground);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.userInfo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.userInfo strong,
+.userInfo span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userInfo strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.userInfo span {
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+
+@media (max-width: 767px) {
+  .user {
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -127,7 +189,4 @@
     border-bottom: 1px solid var(--sidebar-border);
   }
 
-  .footer {
-    display: none;
-  }
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { Image } from '@mantine/core';
 import {
   Activity,
   CalendarDays,
@@ -7,6 +8,7 @@ import {
   FolderKanban,
   LayoutDashboard,
   ListTodo,
+  MoreVertical,
   Settings,
   Users
 } from 'lucide-react';
@@ -24,21 +26,21 @@ type SidebarLink = {
 };
 
 const links: SidebarLink[] = [
-  { label: 'Overview', href: '#overview', icon: LayoutDashboard },
+  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   {
     label: 'Projects',
-    href: '#projects',
+    href: '/projects',
     icon: FolderKanban,
     links: [
-      { label: 'Active projects', href: '#active-projects', icon: FolderKanban },
-      { label: 'Archived projects', href: '#archived-projects', icon: FolderKanban }
+      { label: 'Active projects', href: '/projects/active', icon: FolderKanban },
+      { label: 'Archived projects', href: '/projects/archived', icon: FolderKanban }
     ]
   },
-  { label: 'Tasks', href: '#tasks', icon: ListTodo },
-  { label: 'Calendar', href: '#calendar', icon: CalendarDays },
-  { label: 'Activity', href: '#activity', icon: Activity },
-  { label: 'Members', href: '#members', icon: Users },
-  { label: 'Settings', href: '#settings', icon: Settings }
+  { label: 'Tasks', href: '/tasks', icon: ListTodo },
+  { label: 'Calendar', href: '/calendar', icon: CalendarDays },
+  { label: 'Activity', href: '/activity', icon: Activity },
+  { label: 'Members', href: '/members', icon: Users },
+  { label: 'Settings', href: '/settings', icon: Settings }
 ];
 
 function SidebarLinkItem({ item, pathname }: { item: SidebarLink; pathname: string }) {
@@ -97,7 +99,20 @@ export default function Sidebar(): React.ReactElement {
           ))}
         </ul>
       </nav>
-      <div className={styles.footer}>Version 1.0</div>
+      <button className={styles.user} title="Open user menu" type="button">
+        <span aria-hidden="true" className={styles.avatar}>
+          <Image
+            className="m_11f8ac07 mantine-Avatar-image"
+            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+            alt="Harriette Spoonlicker"
+          />
+        </span>
+        <span className={styles.userInfo}>
+          <strong>Jane Doe</strong>
+          <span>jane.doe@example.com</span>
+        </span>
+        <MoreVertical aria-hidden="true" size={17} />
+      </button>
     </aside>
   );
 }
