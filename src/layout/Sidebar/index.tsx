@@ -1,13 +1,13 @@
 'use client';
 
-import { Image } from '@mantine/core';
+import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronRight } from '@tabler/icons-react';
 import {
   Activity,
   CalendarDays,
   FolderKanban,
   LayoutDashboard,
   ListTodo,
-  MoreVertical,
   Settings,
   Users
 } from 'lucide-react';
@@ -55,20 +55,27 @@ export default function Sidebar(): React.ReactElement {
           ))}
         </ul>
       </nav>
-      <button className={styles.user} title="Open user menu" type="button">
-        <span aria-hidden="true" className={styles.avatar}>
-          <Image
-            className="m_11f8ac07 mantine-Avatar-image"
+      <UnstyledButton className={styles.user}>
+        <div className={styles.user_inner}>
+          <Avatar
             src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+            radius="xl"
             alt="Harriette Spoonlicker"
           />
-        </span>
-        <span className={styles.userInfo}>
-          <strong>Jane Doe</strong>
-          <span>jane.doe@example.com</span>
-        </span>
-        <MoreVertical aria-hidden="true" size={17} />
-      </button>
+
+          <div style={{ flex: 1 }}>
+            <Text size="sm" fw={500}>
+              Harriette Spoonlicker
+            </Text>
+
+            <Text c="dimmed" size="xs">
+              hspoonlicker@outlook.com
+            </Text>
+          </div>
+        </div>
+
+        <IconChevronRight size={14} stroke={1.5} />
+      </UnstyledButton>
     </aside>
   );
 }

@@ -1847,6 +1847,18 @@
   dependencies:
     tslib "^2.8.0"
 
+"@tabler/icons-react@^3.46.0":
+  version "3.46.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-3.46.0.tgz#9840606d10aab071ad2c0dbdfcfba0eef6e9825d"
+  integrity sha512-CCm7xJWhDT2PH4ZIFkP6AgYKtVhq0gpYkjUN+GVh1AzmIQaa77OW0bQPBPQiTE0PsXMR9oSxFqA3qBglzPyrVQ==
+  dependencies:
+    "@tabler/icons" "3.46.0"
+
+"@tabler/icons@3.46.0":
+  version "3.46.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-3.46.0.tgz#28ba3f4895715863fdd78b49a5617764c9557fe5"
+  integrity sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==
+
 "@tiptap/core@3.30.3":
   version "3.30.3"
   resolved "https://registry.npmjs.org/@tiptap/core/-/core-3.30.3.tgz"

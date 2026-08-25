@@ -1,12 +1,16 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 300px;
   min-height: 100vh;
   padding: 24px 16px;
   color: var(--foreground);
   background: var(--sidebar);
   border-right: 1px solid var(--sidebar-border);
+
+  & nav {
+    flex: 1;
+  }
 }
 
 .brand {
@@ -64,40 +68,25 @@
 .user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
   width: 100%;
-  padding: 12px;
-  margin-top: auto;
-  color: var(--foreground);
-  text-align: left;
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease;
+  padding: 0 12px;
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
+
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+  }
+
+  &_inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 }
 
 .user:hover,
 .user:focus-visible {
-  background: var(--sidebar-accent);
-  border-color: var(--sidebar-border);
   outline: none;
-}
-
-.avatar {
-  display: grid;
-  flex: 0 0 34px;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  color: var(--primary-foreground);
-  font-size: 12px;
-  font-weight: 700;
-  background: var(--accent);
-  border-radius: 50%;
-  overflow: hidden;
 }
 
 .userInfo {

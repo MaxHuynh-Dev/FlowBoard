@@ -43,7 +43,10 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(url);
   }
 
-  if (user && request.nextUrl.pathname === ROUTERS.LOGIN) {
+  if (
+    user &&
+    (request.nextUrl.pathname === ROUTERS.LOGIN || request.nextUrl.pathname === ROUTERS.SIGN_UP)
+  ) {
     url.pathname = ROUTERS.DASHBOARD;
     return NextResponse.redirect(url);
   }
