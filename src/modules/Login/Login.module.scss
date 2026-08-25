@@ -1,13 +1,30 @@
 .page {
+  position: relative;
+  isolation: isolate;
   display: flex;
   min-height: 100vh;
   place-items: center;
   justify-content: center;
+  overflow: hidden;
   padding: 32px 20px;
-  background-color: #eef0ec;
-  background-image: linear-gradient(rgba(18, 38, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 38, 42, 0.035) 1px, transparent 1px);
-  background-size: 34px 34px;
+}
+
+.page::before {
+  position: absolute;
+  z-index: -2;
+  inset: -28px;
+  content: '';
+  background-image: url('https://images.unsplash.com/photo-1580339633239-fc0b5fe7cbea?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-position: center;
+  background-size: cover;
+  filter: blur(5px);
+}
+
+.page::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
 }
 
 .shell {
@@ -16,7 +33,6 @@
   width: min(100%, 1040px);
   overflow: hidden;
   background: #fff;
-  border: 1px solid rgba(18, 38, 42, 0.12);
   border-radius: 16px;
   box-shadow: 0 28px 70px rgba(18, 38, 42, 0.14);
 }
@@ -51,7 +67,7 @@
   display: grid;
   width: 30px;
   height: 30px;
-  color: #123238;
+  color: #fff;
   background: #228BE6;
   border-radius: 8px;
   place-items: center;
@@ -87,6 +103,7 @@
 .preview {
   width: min(100%, 410px);
   padding: 18px;
+  margin-top: 20px;
   color: #f8faf6;
   background: rgba(248, 250, 246, 0.08);
   border: 1px solid rgba(248, 250, 246, 0.16);
@@ -232,14 +249,14 @@
 
 .input {
   height: 44px;
-  color: #123238;
+  color: #fff;
   border-color: #dce3de;
   border-radius: 7px;
 }
 
 .input:focus {
-  border-color: #86a92e;
-  box-shadow: 0 0 0 2px rgba(216, 243, 106, 0.4);
+//   border-color: #86a92e;
+//   box-shadow: 0 0 0 2px rgba(216, 243, 106, 0.4);
 }
 
 .formActions {
@@ -261,14 +278,14 @@
 
 .submit {
   height: 44px;
-  color: #123238;
+  color: #fff;
   background: #228BE6;
   border: 0;
   border-radius: 7px;
 }
 
 .submit:hover {
-  background: #c8e65b;
+  background: #228BE6;
 }
 
 .signup {
