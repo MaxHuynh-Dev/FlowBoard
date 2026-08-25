@@ -1,6 +1,6 @@
-import WithoutFooter from '@Layout/WithoutFooter';
 import type React from 'react';
 import type { PropsWithChildren } from 'react';
+import WithoutFooter from '@/layout/WithoutSidebar';
 
 type Props = PropsWithChildren;
 

@@ -1,0 +1,133 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  min-height: 100vh;
+  padding: 24px 16px;
+  color: var(--foreground);
+  background: var(--sidebar);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 28px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.brandMark {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border-radius: 8px;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 12px;
+  margin-bottom: 22px;
+  background: var(--muted);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+}
+
+.workspaceLabel,
+.footer {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workspace strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.links,
+.nested {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nested {
+  gap: 2px;
+  padding: 4px 0 4px 20px;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+}
+
+.link,
+.chevronButton {
+  color: var(--muted-foreground);
+  background: transparent;
+  border: 0;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.link {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.link:hover,
+.chevronButton:hover,
+.active {
+  color: var(--foreground);
+  background: var(--sidebar-accent);
+}
+
+.chevronButton {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin-right: 2px;
+  cursor: pointer;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.chevronOpened {
+  transform: rotate(90deg);
+}
+
+.footer {
+  padding: 20px 12px 0;
+  margin-top: auto;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--sidebar-border);
+  }
+
+  .footer {
+    display: none;
+  }
+}
