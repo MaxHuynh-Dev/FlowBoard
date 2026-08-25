@@ -13,11 +13,12 @@ import {
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import type React from 'react';
+import { ROUTERS } from '@/enums/router';
 import styles from './Sidebar.module.scss';
 import SidebarLinkItem, { type SidebarLink } from './SidebarLinkItem';
 
 const links: SidebarLink[] = [
-  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { label: 'Dashboard', href: ROUTERS.DASHBOARD, icon: LayoutDashboard },
   {
     label: 'Projects',
     href: '/projects',

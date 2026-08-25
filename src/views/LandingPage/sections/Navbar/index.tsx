@@ -2,6 +2,7 @@ import { Button, Container, Group } from '@mantine/core';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
+import { ROUTERS } from '@/enums/router';
 import styles from './Navbar.module.scss';
 
 export default function Navbar(): React.ReactElement {
@@ -18,10 +19,15 @@ export default function Navbar(): React.ReactElement {
           <a href="#pricing">Pricing</a>
         </Group>
         <Group gap="sm">
-          <Button component="a" href="/login" className={styles.loginButton} variant="subtle">
+          <Button
+            component="a"
+            href={ROUTERS.LOGIN}
+            className={styles.loginButton}
+            variant="subtle"
+          >
             Log in
           </Button>
-          <Button component="a" href="/sign-up" className={styles.navCta}>
+          <Button component="a" href={ROUTERS.SIGN_UP} className={styles.navCta}>
             Get started <ArrowRight size={15} />
           </Button>
         </Group>

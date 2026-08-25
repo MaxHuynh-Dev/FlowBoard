@@ -2,6 +2,7 @@
 
 import type { Provider } from '@supabase/supabase-js';
 import { useState } from 'react';
+import { ROUTERS } from '@/enums/router';
 import { createClient } from '@/utils/supabase/client';
 
 type OAuthProvider = Extract<Provider, 'google' | 'github'>;
@@ -17,7 +18,7 @@ type UseOAuthWithProviderReturn = {
 };
 
 export default function useOAuthWithProvider({
-  redirectPath = '/dashboard'
+  redirectPath = ROUTERS.DASHBOARD
 }: UseOAuthWithProviderOptions = {}): UseOAuthWithProviderReturn {
   const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
   const [error, setError] = useState<string | null>(null);

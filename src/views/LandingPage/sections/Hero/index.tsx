@@ -1,6 +1,7 @@
 import { Badge, Button, Card, Container, Group, Progress, Stack, Text, Title } from '@mantine/core';
 import { ArrowRight, ChevronRight, Circle, Plus, Sparkles } from 'lucide-react';
 import type React from 'react';
+import { ROUTERS } from '@/enums/router';
 import { projects } from '../data';
 import styles from './Hero.module.scss';
 
@@ -21,7 +22,7 @@ export default function Hero(): React.ReactElement {
           <Group className={styles.heroActions} gap="sm">
             <Button
               component="a"
-              href="/sign-up"
+              href={ROUTERS.SIGN_UP}
               className={styles.heroCta}
               rightSection={<ArrowRight size={17} />}
             >

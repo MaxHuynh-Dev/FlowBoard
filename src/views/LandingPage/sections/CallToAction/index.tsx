@@ -1,6 +1,7 @@
 import { Button, Container, Text, Title } from '@mantine/core';
 import { ArrowRight } from 'lucide-react';
 import type React from 'react';
+import { ROUTERS } from '@/enums/router';
 import styles from './CallToAction.module.scss';
 
 export default function CallToAction(): React.ReactElement {
@@ -14,7 +15,7 @@ export default function CallToAction(): React.ReactElement {
         </div>
         <Button
           component="a"
-          href="/sign-up"
+          href={ROUTERS.LOGIN}
           className={styles.heroCta}
           rightSection={<ArrowRight size={17} />}
         >

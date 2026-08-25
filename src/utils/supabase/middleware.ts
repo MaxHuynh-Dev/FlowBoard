@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from '@/constants/envs';
+import { ROUTERS } from '@/enums/router';
 
 export const updateSession = async (request: NextRequest) => {
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
@@ -37,13 +38,13 @@ export const updateSession = async (request: NextRequest) => {
 
   const url = request.nextUrl.clone();
 
-  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-    url.pathname = '/login';
+  if (!user && request.nextUrl.pathname.startsWith(ROUTERS.DASHBOARD)) {
+    url.pathname = ROUTERS.LOGIN;
     return NextResponse.redirect(url);
   }
 
-  if (user && request.nextUrl.pathname === '/login') {
-    url.pathname = '/dashboard';
+  if (user && request.nextUrl.pathname === ROUTERS.LOGIN) {
+    url.pathname = ROUTERS.DASHBOARD;
     return NextResponse.redirect(url);
   }
 

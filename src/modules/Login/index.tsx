@@ -4,6 +4,7 @@ import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@manti
 import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
 import { useActionState } from 'react';
+import { ROUTERS } from '@/enums/router';
 import useOAuthWithProvider from '@/hooks/useOAuthWithProvider';
 import { createClient } from '@/utils/supabase/client';
 import styles from './Login.module.scss';
@@ -26,7 +27,7 @@ export default function Login(): React.ReactElement {
         return { error: authError.message };
       }
 
-      window.location.assign('/dashboard');
+      window.location.assign(ROUTERS.DASHBOARD);
       return { error: null };
     },
     initialLoginState
@@ -138,7 +139,7 @@ export default function Login(): React.ReactElement {
           </form>
 
           <div className={styles.signup}>
-            Don&apos;t have an account? <Anchor href="/sign-up">Create one</Anchor>
+            Don&apos;t have an account? <Anchor href={ROUTERS.SIGN_UP}>Create one</Anchor>
           </div>
         </Paper>
       </div>
