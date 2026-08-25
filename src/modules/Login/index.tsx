@@ -3,15 +3,16 @@
 import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@mantine/core';
 import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import styles from './Login.module.scss';
 
 type OAuthProvider = 'google' | 'github';
 
 export default function Login(): React.ReactElement {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
   const [emailLoading, setEmailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,16 +39,16 @@ export default function Login(): React.ReactElement {
     event.preventDefault();
     setError(null);
     setEmailLoading(true);
-
     const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || ''
+    });
     if (authError) {
       setError(authError.message);
     } else {
       window.location.assign('/dashboard');
     }
-
     setEmailLoading(false);
   };
 
@@ -124,21 +125,19 @@ export default function Login(): React.ReactElement {
 
           <form className={styles.form} onSubmit={signInWithEmail}>
             <TextInput
+              ref={emailRef}
               label="Email address"
               classNames={{ input: styles.input, label: styles.label }}
-              onChange={(event) => setEmail(event.currentTarget.value)}
               placeholder="you@example.com"
               required
               type="email"
-              value={email}
             />
             <PasswordInput
+              ref={passwordRef}
               label="Password"
               classNames={{ input: styles.input, label: styles.label }}
-              onChange={(event) => setPassword(event.currentTarget.value)}
               placeholder="Your password"
               required
-              value={password}
             />
             <div className={styles.formActions}>
               <Anchor href="/forgot-password" size="sm">

@@ -13,8 +13,8 @@
   position: absolute;
   z-index: -2;
   inset: -28px;
-  content: '';
-  background-image: url('https://images.unsplash.com/photo-1580339633239-fc0b5fe7cbea?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  content: "";
+  background-image: url("https://images.unsplash.com/photo-1580339633239-fc0b5fe7cbea?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-position: center;
   background-size: cover;
   filter: blur(5px);
@@ -24,7 +24,7 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  content: '';
+  content: "";
 }
 
 .shell {
@@ -68,14 +68,14 @@
   width: 30px;
   height: 30px;
   color: #fff;
-  background: #228BE6;
+  background: #228be6;
   border-radius: 8px;
   place-items: center;
   transform: rotate(-6deg);
 }
 
 .eyebrow {
-  color: #228BE6;
+  color: #228be6;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -134,7 +134,7 @@
   display: block;
   width: 68%;
   height: 100%;
-  background: #228BE6;
+  background: #228be6;
   border-radius: inherit;
 }
 
@@ -173,7 +173,7 @@
 
 .done {
   color: #123238;
-  background: #228BE6;
+  background: #228be6;
 }
 
 .todo {
@@ -249,14 +249,14 @@
 
 .input {
   height: 44px;
-  color: #fff;
+  color: #000;
   border-color: #dce3de;
   border-radius: 7px;
 }
 
 .input:focus {
-//   border-color: #86a92e;
-//   box-shadow: 0 0 0 2px rgba(216, 243, 106, 0.4);
+  //   border-color: #86a92e;
+  //   box-shadow: 0 0 0 2px rgba(216, 243, 106, 0.4);
 }
 
 .formActions {
@@ -279,13 +279,13 @@
 .submit {
   height: 44px;
   color: #fff;
-  background: #228BE6;
+  background: #228be6;
   border: 0;
   border-radius: 7px;
 }
 
 .submit:hover {
-  background: #228BE6;
+  background: #228be6;
 }
 
 .signup {
