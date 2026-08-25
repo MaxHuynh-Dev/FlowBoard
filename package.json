@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "format": "biome format --write .",
     "lint": "biome lint .",
