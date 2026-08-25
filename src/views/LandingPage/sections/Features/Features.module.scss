@@ -1,0 +1,74 @@
+.section {
+    padding: 125px 0;
+}
+.sectionIntro {
+    max-width: 570px;
+    margin-bottom: 50px;
+}
+.sectionKicker {
+    color: #86a832;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+.sectionIntro h2 {
+    margin-top: 13px;
+    color: #123238;
+    font-family: var(--font-raleway);
+    font-size: clamp(32px, 4vw, 49px);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.04;
+}
+.sectionIntro > p {
+    max-width: 510px;
+    margin-top: 16px;
+    color: #72847f;
+    font-size: 15px;
+    line-height: 1.65;
+}
+.featureCard {
+    min-height: 260px;
+    border: 1px solid #e1e9e3;
+    border-radius: 9px;
+    box-shadow: none;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+.featureCard:hover {
+    box-shadow: 0 16px 35px rgba(24, 59, 64, 0.08);
+    transform: translateY(-4px);
+}
+.featureIcon {
+    margin-bottom: 25px;
+    color: #52736a;
+    background: #eef5e8;
+}
+.featureCard h3 {
+    color: #23464a;
+    font-family: var(--font-raleway);
+    font-size: 19px;
+}
+.featureCard p {
+    margin-top: 10px;
+    color: #7a8b86;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.featureCard a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    color: #52736a;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+@media (max-width: 650px) {
+    .section {
+        padding: 78px 0;
+    }
+}

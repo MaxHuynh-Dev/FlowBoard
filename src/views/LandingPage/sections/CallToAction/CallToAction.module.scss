@@ -1,0 +1,56 @@
+.ctaSection {
+    padding: 90px 0;
+}
+.cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 52px 58px;
+    background: #c9eb67;
+    border-radius: 10px;
+}
+.sectionKicker {
+    color: #52736a;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+.cta h2 {
+    margin-top: 13px;
+    color: #173f43;
+    font-family: var(--font-raleway);
+    font-size: clamp(32px, 4vw, 49px);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.04;
+}
+.cta > div > p {
+    margin-top: 12px;
+    color: #52736a;
+    font-size: 15px;
+}
+.heroCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 46px;
+    padding: 0 18px;
+    color: #17383d;
+    font-size: 13px;
+    background: #f6fbf1;
+    border: 0;
+}
+.heroCta:hover {
+    background: #fff;
+}
+@media (max-width: 650px) {
+    .cta {
+        display: block;
+        padding: 34px 25px;
+    }
+    .cta .heroCta {
+        margin-top: 25px;
+    }
+}

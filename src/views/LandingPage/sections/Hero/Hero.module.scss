@@ -1,0 +1,250 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 0 100px;
+    background: radial-gradient(circle at 80% 35%, rgba(201, 235, 103, 0.32), transparent 28%), #f7f9f5;
+}
+.hero::after {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    width: 1px;
+    height: 100%;
+    content: "";
+    background: rgba(24, 59, 64, 0.06);
+}
+.heroGrid {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.83fr) minmax(500px, 1.17fr);
+    align-items: center;
+    gap: 64px;
+}
+.heroBadge {
+    color: #52736a;
+    background: #e9f4d0;
+}
+.heroTitle {
+    max-width: 570px;
+    margin-top: 23px;
+    color: #123238;
+    font-family: var(--font-raleway);
+    font-size: clamp(44px, 5.2vw, 76px);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 0.98;
+}
+.heroText {
+    max-width: 470px;
+    margin-top: 23px;
+    color: #6d817c;
+    font-size: 17px;
+    line-height: 1.65;
+}
+.heroActions {
+    margin-top: 30px;
+}
+.heroCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 46px;
+    padding: 0 18px;
+    color: #17383d;
+    font-size: 13px;
+    background: #c9eb67;
+    border: 0;
+}
+.heroCta:hover {
+    background: #b9de56;
+}
+.secondaryCta {
+    color: #52736a;
+    font-size: 13px;
+}
+.noCard {
+    margin-top: 18px;
+    color: #8a9b95;
+    font-size: 11px;
+}
+.noCard span {
+    margin: 0 7px;
+    color: #c2cec8;
+}
+.dashboardFrame {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid rgba(18, 50, 56, 0.18);
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(18, 50, 56, 0.16);
+    transform: rotate(1.5deg);
+}
+.windowBar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 13px;
+    background: #e7ece6;
+    border-bottom: 1px solid #d2ddd5;
+}
+.windowBar > span {
+    width: 7px;
+    height: 7px;
+    background: #bac8c0;
+    border-radius: 50%;
+}
+.windowBar p {
+    margin-left: 10px;
+    color: #81908a;
+    font-size: 9px;
+}
+.dashboardPreview {
+    display: grid;
+    grid-template-columns: 142px 1fr;
+    min-height: 388px;
+    background: #f6f8f4;
+}
+.miniSidebar {
+    padding: 18px 12px;
+    color: #dfe9df;
+    background: #123238;
+}
+.miniBrand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 35px;
+    font-size: 11px;
+    font-weight: 700;
+}
+.miniBrand span {
+    display: grid;
+    width: 19px;
+    height: 19px;
+    color: #123238;
+    background: #c9eb67;
+    border-radius: 5px;
+    place-items: center;
+}
+.miniWorkspace {
+    margin-bottom: 12px;
+    color: #8aa09a;
+    font-size: 7px;
+    letter-spacing: 0.12em;
+}
+.miniLink,
+.miniLinkActive {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 6px;
+    margin-bottom: 4px;
+    color: #9bb0aa;
+    font-size: 9px;
+    border-radius: 4px;
+}
+.miniLinkActive {
+    color: #f5f9ef;
+    background: rgba(201, 235, 103, 0.15);
+}
+.miniMain {
+    padding: 26px 25px;
+}
+.miniKicker {
+    color: #8a9b95;
+    font-size: 8px;
+}
+.miniMain h3 {
+    margin-top: 5px;
+    color: #173f43;
+    font-family: var(--font-raleway);
+    font-size: 22px;
+}
+.miniMain h3 span {
+    color: #9abf35;
+}
+.miniButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #17383d;
+    background: #c9eb67;
+    border: 0;
+}
+.miniStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    margin: 28px 0 16px;
+}
+.miniStat {
+    padding: 11px;
+    background: #fff;
+    border: 1px solid #e2e9e4;
+    border-radius: 6px;
+}
+.miniStat p {
+    color: #173f43;
+    font-size: 19px;
+    font-weight: 700;
+}
+.miniStat small,
+.miniPanel small {
+    color: #91a09b;
+    font-size: 8px;
+}
+.miniPanel {
+    border: 1px solid #e2e9e4;
+    border-radius: 7px;
+    box-shadow: none;
+}
+.miniPanelTitle {
+    color: #23464a;
+    font-size: 12px;
+    font-weight: 700;
+}
+.miniProject {
+    color: #45625d;
+    font-size: 9px;
+}
+@media (max-width: 900px) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .heroCopy,
+    .dashboardFrame {
+        max-width: 720px;
+    }
+}
+@media (max-width: 650px) {
+    .hero {
+        padding: 64px 0 70px;
+    }
+    .heroTitle {
+        font-size: 44px;
+    }
+    .dashboardFrame {
+        transform: none;
+    }
+    .dashboardPreview {
+        grid-template-columns: 100px 1fr;
+        min-height: 310px;
+    }
+    .miniMain {
+        padding: 17px 13px;
+    }
+    .miniSidebar {
+        padding: 13px 8px;
+    }
+    .miniStats {
+        margin-top: 18px;
+    }
+    .miniStat {
+        padding: 7px;
+    }
+    .miniStat p {
+        font-size: 15px;
+    }
+}

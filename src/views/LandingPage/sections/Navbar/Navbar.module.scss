@@ -1,0 +1,61 @@
+.navbar {
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid rgba(24, 59, 64, 0.08);
+    background: rgba(247, 249, 245, 0.86);
+}
+.navInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 76px;
+}
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #123238;
+    font-size: 17px;
+    font-weight: 750;
+    text-decoration: none;
+}
+.brandMark {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    color: #123238;
+    background: #c9eb67;
+    border-radius: 8px;
+    place-items: center;
+    transform: rotate(-6deg);
+}
+.navLinks a,
+.loginButton {
+    color: #607772;
+    font-size: 13px;
+    text-decoration: none;
+}
+.navLinks a:hover,
+.loginButton:hover {
+    color: #123238;
+}
+.navCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #17383d;
+    font-size: 12px;
+    background: #c9eb67;
+    border: 0;
+}
+.navCta:hover {
+    background: #b9de56;
+}
+@media (max-width: 650px) {
+    .navLinks {
+        display: none;
+    }
+    .navInner {
+        min-height: 66px;
+    }
+}

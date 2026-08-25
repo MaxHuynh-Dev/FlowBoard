@@ -1,0 +1,110 @@
+.workflowSection {
+    padding: 115px 0;
+    background: #eaf1e8;
+}
+.workflowGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 100px;
+}
+.sectionKicker {
+    color: #86a832;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+.workflowGrid h2 {
+    margin-top: 13px;
+    color: #123238;
+    font-family: var(--font-raleway);
+    font-size: clamp(32px, 4vw, 49px);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.04;
+}
+.workflowGrid > div > p {
+    max-width: 510px;
+    margin-top: 16px;
+    color: #72847f;
+    font-size: 15px;
+    line-height: 1.65;
+}
+.steps {
+    margin-top: 38px;
+}
+.stepNumber {
+    color: #9abf35;
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+}
+.steps h4 {
+    color: #23464a;
+    font-family: var(--font-raleway);
+    font-size: 17px;
+}
+.steps p {
+    max-width: 330px;
+    margin-top: 5px;
+    color: #71847d;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.quotePanel {
+    padding: 42px;
+    background: #173f43;
+    border-radius: 10px;
+    box-shadow: 15px 15px 0 #c9eb67;
+}
+.quoteMark {
+    color: #c9eb67;
+    font-family: Georgia, serif;
+    font-size: 70px;
+    line-height: 0.5;
+}
+.quote {
+    margin-top: 20px;
+    color: #eff7ed;
+    font-family: var(--font-raleway);
+    font-size: 23px;
+    line-height: 1.35;
+}
+.avatarMock {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    color: #173f43;
+    background: #c9eb67;
+    border-radius: 50%;
+    place-items: center;
+}
+.quoteName {
+    color: #f2f8ee;
+    font-size: 12px;
+    font-weight: 700;
+}
+.quoteRole {
+    margin-top: 2px;
+    color: #8da9a1;
+    font-size: 10px;
+}
+@media (max-width: 900px) {
+    .workflowGrid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+}
+@media (max-width: 650px) {
+    .workflowSection {
+        padding: 78px 0;
+    }
+    .quotePanel {
+        padding: 28px;
+        box-shadow: 8px 8px 0 #c9eb67;
+    }
+    .quote {
+        font-size: 20px;
+    }
+}
