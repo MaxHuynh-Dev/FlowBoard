@@ -3,22 +3,20 @@
 import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@mantine/core';
 import { ArrowUpRight, Check, Github, UserPlus } from 'lucide-react';
 import type React from 'react';
-import { useActionState, useState } from 'react';
+import { useActionState } from 'react';
+import useOAuthWithProvider from '@/hooks/useOAuthWithProvider';
 import { createClient } from '@/utils/supabase/client';
 import styles from '../Login/Login.module.scss';
 
-type OAuthProvider = 'google' | 'github';
 type SignUpActionState = { error: string | null; success: string | null };
 
 const initialSignUpState: SignUpActionState = { error: null, success: null };
 
 export default function SignUp(): React.ReactElement {
-  const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
-  const [oauthError, setOauthError] = useState<string | null>(null);
+  const { error: oauthError, loadingProvider, signInWithProvider } = useOAuthWithProvider();
 
   const [signUpState, signUpAction, emailLoading] = useActionState(
     async (_previousState: SignUpActionState, formData: FormData): Promise<SignUpActionState> => {
-      setOauthError(null);
       const email = String(formData.get('email') ?? '').trim();
       const password = String(formData.get('password') ?? '');
       const confirmPassword = String(formData.get('confirmPassword') ?? '');
@@ -56,24 +54,6 @@ export default function SignUp(): React.ReactElement {
     },
     initialSignUpState
   );
-
-  const signUpWithProvider = async (provider: OAuthProvider): Promise<void> => {
-    setOauthError(null);
-    setLoadingProvider(provider);
-
-    const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`
-      }
-    });
-
-    if (authError) {
-      setOauthError(authError.message);
-      setLoadingProvider(null);
-    }
-  };
 
   return (
     <main className={styles.page}>
@@ -126,7 +106,7 @@ export default function SignUp(): React.ReactElement {
               fullWidth
               leftSection={<span className={styles.socialIcon}>G</span>}
               loading={loadingProvider === 'google'}
-              onClick={() => signUpWithProvider('google')}
+              onClick={() => signInWithProvider('google')}
               variant="default"
             >
               Google
@@ -137,7 +117,7 @@ export default function SignUp(): React.ReactElement {
               fullWidth
               leftSection={<Github size={17} />}
               loading={loadingProvider === 'github'}
-              onClick={() => signUpWithProvider('github')}
+              onClick={() => signInWithProvider('github')}
               variant="default"
             >
               GitHub

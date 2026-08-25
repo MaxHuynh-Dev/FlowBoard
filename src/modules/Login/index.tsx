@@ -3,22 +3,20 @@
 import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@mantine/core';
 import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
-import { useActionState, useState } from 'react';
+import { useActionState } from 'react';
+import useOAuthWithProvider from '@/hooks/useOAuthWithProvider';
 import { createClient } from '@/utils/supabase/client';
 import styles from './Login.module.scss';
 
-type OAuthProvider = 'google' | 'github';
 type LoginActionState = { error: string | null };
 
 const initialLoginState: LoginActionState = { error: null };
 
 export default function Login(): React.ReactElement {
-  const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
-  const [oauthError, setOauthError] = useState<string | null>(null);
+  const { error: oauthError, loadingProvider, signInWithProvider } = useOAuthWithProvider();
 
   const [loginState, loginAction, emailLoading] = useActionState(
     async (_previousState: LoginActionState, formData: FormData): Promise<LoginActionState> => {
-      setOauthError(null);
       const email = String(formData.get('email') ?? '');
       const password = String(formData.get('password') ?? '');
       const supabase = createClient();
@@ -33,24 +31,6 @@ export default function Login(): React.ReactElement {
     },
     initialLoginState
   );
-
-  const signInWithProvider = async (provider: OAuthProvider): Promise<void> => {
-    setOauthError(null);
-    setLoadingProvider(provider);
-
-    const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`
-      }
-    });
-
-    if (authError) {
-      setOauthError(authError.message);
-      setLoadingProvider(null);
-    }
-  };
 
   return (
     <main className={styles.page}>
