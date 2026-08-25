@@ -1,6 +1,6 @@
 import type React from 'react';
 
-export default function WithoutFooter({
+export default function WithoutSidebar({
   children
 }: {
   children: React.ReactNode;
