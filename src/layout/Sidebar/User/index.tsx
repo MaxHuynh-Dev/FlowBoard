@@ -3,8 +3,10 @@
 import { Avatar as AvatarDicebear, Style } from '@dicebear/core';
 import lorelei from '@dicebear/styles/micah.json' with { type: 'json' };
 import { Avatar, Flex, Menu, Menubar, Text } from '@mantine/core';
-import { LogOut } from 'lucide-react';
+import { CircleUserRound, LogOut } from 'lucide-react';
+import Link from 'next/link';
 import type React from 'react';
+import { ROUTERS } from '@/enums/router';
 import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import { useUserStore } from '@/stores/userStore';
 import styles from './User.module.scss';
@@ -49,6 +51,16 @@ export default function User(): React.ReactElement {
           </Flex>
         </Menubar.Target>
         <Menubar.Dropdown>
+          <Menu.Item>
+            <Link href={ROUTERS.PROFILE}>
+              <Flex gap="md" justify="flex-start" align="center" wrap="wrap">
+                <CircleUserRound size={24} />
+                <Text size="sm" fw={500}>
+                  Profile
+                </Text>
+              </Flex>
+            </Link>
+          </Menu.Item>
           <Menu.Item onClick={handleLogout}>
             <Flex gap="md" justify="flex-start" align="center" wrap="wrap">
               <LogOut size={24} />
