@@ -1,7 +1,7 @@
 'use client';
 
 import { Avatar as AvatarDicebear, Style } from '@dicebear/core';
-import lorelei from '@dicebear/styles/lorelei.json' with { type: 'json' };
+import lorelei from '@dicebear/styles/micah.json' with { type: 'json' };
 import { Avatar, Flex, Menu, Menubar, Text } from '@mantine/core';
 import { LogOut } from 'lucide-react';
 import type React from 'react';
@@ -16,7 +16,9 @@ export default function User(): React.ReactElement {
   const { handleLogout } = useAuthEmailProvider();
   const dataUri = new AvatarDicebear(style, {
     seed: user?.user_metadata.full_name,
-    size: 128
+    size: 228,
+    backgroundColorFill: 'linear',
+    backgroundColor: ['#ddd8d8']
   }).toDataUri();
 
   return (
