@@ -5,8 +5,8 @@ import { ArrowUpRight, Check, Github, UserPlus } from 'lucide-react';
 import type React from 'react';
 import { useActionState } from 'react';
 import { ROUTERS } from '@/enums/router';
+import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import useOAuthWithProvider from '@/hooks/useOAuthWithProvider';
-import { createClient } from '@/utils/supabase/client';
 import styles from '../Login/Login.module.scss';
 
 type SignUpActionState = { error: string | null; success: string | null };
@@ -15,6 +15,7 @@ const initialSignUpState: SignUpActionState = { error: null, success: null };
 
 export default function SignUp(): React.ReactElement {
   const { error: oauthError, loadingProvider, signInWithProvider } = useOAuthWithProvider();
+  const { handleSignUp } = useAuthEmailProvider();
 
   const [signUpState, signUpAction, emailLoading] = useActionState(
     async (_previousState: SignUpActionState, formData: FormData): Promise<SignUpActionState> => {
@@ -22,36 +23,8 @@ export default function SignUp(): React.ReactElement {
       const password = String(formData.get('password') ?? '');
       const confirmPassword = String(formData.get('confirmPassword') ?? '');
 
-      if (password !== confirmPassword) {
-        return { error: 'Passwords do not match.', success: null };
-      }
-
-      if (password.length < 6) {
-        return { error: 'Password must be at least 6 characters.', success: null };
-      }
-
-      const supabase = createClient();
-      const { data, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=${ROUTERS.DASHBOARD}`
-        }
-      });
-
-      if (authError) {
-        return { error: authError.message, success: null };
-      }
-
-      if (!data.session) {
-        return {
-          error: null,
-          success: 'Account created. Check your email to confirm your account.'
-        };
-      }
-
-      window.location.assign(ROUTERS.DASHBOARD);
-      return initialSignUpState;
+      const { error, success } = await handleSignUp(email, password, confirmPassword);
+      return { error, success };
     },
     initialSignUpState
   );
@@ -163,12 +136,12 @@ export default function SignUp(): React.ReactElement {
                 Create account
               </Button>
             </div>
-            {signUpState.error || oauthError ? (
+            {/* {signUpState.error || oauthError ? (
               <div className={styles.error}>{signUpState.error ?? oauthError}</div>
             ) : null}
             {signUpState.success ? (
               <div className={styles.success}>{signUpState.success}</div>
-            ) : null}
+            ) : null} */}
           </form>
         </Paper>
       </div>

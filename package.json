@@ -13,6 +13,8 @@
     "lint:fix": "biome check --write ."
   },
   "dependencies": {
+    "@dicebear/core": "^10.6.1",
+    "@dicebear/styles": "^10.5.0",
     "@ducanh2912/next-pwa": "^10.2.9",
     "@gsap/react": "^2.1.2",
     "@mantine/carousel": "^9.5.2",
@@ -59,6 +61,7 @@
     "react-hook-form": "^7.65.0",
     "react-inlinesvg": "^4.2.0",
     "react-scan": "^0.4.3",
+    "react-toastify": "^11.1.0",
     "recharts": "^3.10.1",
     "sass": "^1.93.2",
     "sharp": "^0.35.3",
