@@ -65,60 +65,7 @@
   list-style: none;
 }
 
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 12px;
-  color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
 
-  @mixin hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
-  }
-
-  &_inner {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-}
-
-.user:hover,
-.user:focus-visible {
-  outline: none;
-}
-
-.userInfo {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-  gap: 2px;
-}
-
-.userInfo strong,
-.userInfo span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.userInfo strong {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.userInfo span {
-  color: var(--muted-foreground);
-  font-size: 11px;
-}
-
-@media (max-width: 767px) {
-  .user {
-    margin-top: 20px;
-  }
-}
 
 @media (max-width: 767px) {
   .sidebar {

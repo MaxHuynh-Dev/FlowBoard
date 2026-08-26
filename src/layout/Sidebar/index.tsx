@@ -1,7 +1,5 @@
 'use client';
 
-import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
-import { IconChevronRight } from '@tabler/icons-react';
 import {
   Activity,
   CalendarDays,
@@ -14,9 +12,9 @@ import {
 import { usePathname } from 'next/navigation';
 import type React from 'react';
 import { ROUTERS } from '@/enums/router';
-import { useUserStore } from '@/stores/userStore';
 import styles from './Sidebar.module.scss';
 import SidebarLinkItem, { type SidebarLink } from './SidebarLinkItem';
+import User from './User';
 
 const links: SidebarLink[] = [
   { label: 'Dashboard', href: ROUTERS.DASHBOARD, icon: LayoutDashboard },
@@ -38,9 +36,6 @@ const links: SidebarLink[] = [
 
 export default function Sidebar(): React.ReactElement {
   const pathname = usePathname();
-  const user = useUserStore((state) => state.user);
-
-  console.log('user', user);
   return (
     <aside aria-label="Workspace navigation" className={styles.sidebar}>
       <div className={styles.brand}>
@@ -58,27 +53,7 @@ export default function Sidebar(): React.ReactElement {
           ))}
         </ul>
       </nav>
-      <UnstyledButton className={styles.user}>
-        <div className={styles.user_inner}>
-          <Avatar
-            src={user?.user_metadata.avatar_url || '/default-avatar.png'}
-            radius="xl"
-            alt="Harriette Spoonlicker"
-          />
-
-          <div style={{ flex: 1 }}>
-            <Text size="sm" fw={500}>
-              {user?.user_metadata.full_name || 'Guest User'}
-            </Text>
-
-            <Text c="dimmed" size="xs">
-              {user?.email}
-            </Text>
-          </div>
-        </div>
-
-        {/* <IconChevronRight size={14} stroke={1.5} /> */}
-      </UnstyledButton>
+      <User />
     </aside>
   );
 }
