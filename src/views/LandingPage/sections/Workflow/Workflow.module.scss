@@ -9,7 +9,7 @@
     gap: 100px;
 }
 .sectionKicker {
-    color: #86a832;
+    color: var(--primary);
     font-size: 11px;
     font-weight: 750;
     letter-spacing: 0.13em;
@@ -35,7 +35,7 @@
     margin-top: 38px;
 }
 .stepNumber {
-    color: #9abf35;
+    color: var(--primary);
     font-size: 12px;
     font-weight: 750;
     letter-spacing: 0.1em;
@@ -56,10 +56,10 @@
     padding: 42px;
     background: #173f43;
     border-radius: 10px;
-    box-shadow: 15px 15px 0 #c9eb67;
+    box-shadow: 15px 15px 0 var(--primary);
 }
 .quoteMark {
-    color: #c9eb67;
+    color: var(--primary);
     font-family: Georgia, serif;
     font-size: 70px;
     line-height: 0.5;
@@ -76,7 +76,7 @@
     width: 34px;
     height: 34px;
     color: #173f43;
-    background: #c9eb67;
+    background: var(--primary);
     border-radius: 50%;
     place-items: center;
 }
@@ -102,7 +102,7 @@
     }
     .quotePanel {
         padding: 28px;
-        box-shadow: 8px 8px 0 #c9eb67;
+        box-shadow: 8px 8px 0 var(--primary);
     }
     .quote {
         font-size: 20px;

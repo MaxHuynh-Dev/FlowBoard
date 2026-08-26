@@ -30,7 +30,7 @@
     line-height: 1;
 }
 .header h1 span {
-    color: #a4c93c;
+    color: var(--primary);
     font-size: 0.7em;
 }
 .subtitle {
@@ -47,11 +47,11 @@
 }
 .primaryButton {
     color: #17383d;
-    background: #c5e85e;
+    background: var(--primary);
     border: 0;
 }
 .primaryButton:hover {
-    background: #b6dc4e;
+    background: var(--primary-hover);
 }
 .stats,
 .contentGrid,
@@ -97,7 +97,7 @@
     font-size: 12px;
 }
 .statChange strong {
-    color: #83a72b;
+    color: var(--primary);
     font-weight: 700;
 }
 .contentGrid {
@@ -174,7 +174,7 @@
     color: #a4b3ae;
 }
 .taskCheckDone {
-    color: #8fb43b;
+    color: var(--primary);
 }
 .taskBody {
     flex: 1;
@@ -231,7 +231,7 @@
     border-radius: 10px;
 }
 .focusKicker {
-    color: #c5e85e;
+    color: var(--primary);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;

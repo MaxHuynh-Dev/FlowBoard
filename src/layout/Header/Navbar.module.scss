@@ -26,7 +26,7 @@
     width: 30px;
     height: 30px;
     color: #123238;
-    background: #c9eb67;
+    background: var(--primary);
     border-radius: 8px;
     place-items: center;
     transform: rotate(-6deg);
@@ -47,11 +47,11 @@
     gap: 7px;
     color: #17383d;
     font-size: 12px;
-    background: #c9eb67;
+    background: var(--primary);
     border: 0;
 }
 .navCta:hover {
-    background: #b9de56;
+    background: var(--primary-hover);
 }
 @media (max-width: 650px) {
     .navLinks {

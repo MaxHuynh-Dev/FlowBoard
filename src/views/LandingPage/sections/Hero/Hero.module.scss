@@ -2,7 +2,7 @@
     position: relative;
     overflow: hidden;
     padding: 90px 0 100px;
-    background: radial-gradient(circle at 80% 35%, rgba(201, 235, 103, 0.32), transparent 28%), #f7f9f5;
+    background: radial-gradient(circle at 80% 35%, rgba(var(--primary-rgb), 0.32), transparent 28%), #f7f9f5;
 }
 .hero::after {
     position: absolute;
@@ -51,11 +51,11 @@
     padding: 0 18px;
     color: #17383d;
     font-size: 13px;
-    background: #c9eb67;
+    background: var(--primary);
     border: 0;
 }
 .heroCta:hover {
-    background: #b9de56;
+    background: var(--primary-hover);
 }
 .secondaryCta {
     color: #52736a;
@@ -123,7 +123,7 @@
     width: 19px;
     height: 19px;
     color: #123238;
-    background: #c9eb67;
+    background: var(--primary);
     border-radius: 5px;
     place-items: center;
 }
@@ -146,7 +146,7 @@
 }
 .miniLinkActive {
     color: #f5f9ef;
-    background: rgba(201, 235, 103, 0.15);
+    background: rgba(var(--primary-rgb), 0.15);
 }
 .miniMain {
     padding: 26px 25px;
@@ -162,14 +162,14 @@
     font-size: 22px;
 }
 .miniMain h3 span {
-    color: #9abf35;
+    color: var(--primary);
 }
 .miniButton {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     color: #17383d;
-    background: #c9eb67;
+    background: var(--primary);
     border: 0;
 }
 .miniStats {

@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import '@Styles/global.css';
 
 import { inter, raleway } from '@Constants/fonts';
 import { DEFAULT_METADATA } from '@Constants/metadata';
