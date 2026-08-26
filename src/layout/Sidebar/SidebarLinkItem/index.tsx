@@ -1,11 +1,11 @@
 'use client';
 
+import { Text } from '@mantine/core';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
 import { useState } from 'react';
 import styles from './SidebarLinkItem.module.scss';
-
 export type SidebarLink = {
   label: string;
   href: string;
@@ -26,13 +26,13 @@ export default function SidebarLinkItem({
   const [opened, setOpened] = useState(true);
   const Icon = item.icon;
   const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
-
+  console.log(pathname, item.href);
   return (
     <li className={styles.item}>
       <div className={styles.linkRow}>
         <Link className={`${styles.link} ${isActive ? styles.active : ''}`} href={item.href}>
-          <Icon size={18} strokeWidth={1.8} />
-          <span>{item.label}</span>
+          <Icon size={20} strokeWidth={1.8} />
+          <Text size="md">{item.label}</Text>
         </Link>
         {hasChildren ? (
           <button
