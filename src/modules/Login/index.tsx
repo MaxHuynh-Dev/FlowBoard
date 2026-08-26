@@ -5,8 +5,8 @@ import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
 import { useActionState } from 'react';
 import { ROUTERS } from '@/enums/router';
+import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import useOAuthWithProvider from '@/hooks/useOAuthWithProvider';
-import { createClient } from '@/utils/supabase/client';
 import styles from './Login.module.scss';
 
 type LoginActionState = { error: string | null };
@@ -15,20 +15,14 @@ const initialLoginState: LoginActionState = { error: null };
 
 export default function Login(): React.ReactElement {
   const { error: oauthError, loadingProvider, signInWithProvider } = useOAuthWithProvider();
+  const { handleLogin } = useAuthEmailProvider();
 
   const [loginState, loginAction, emailLoading] = useActionState(
     async (_previousState: LoginActionState, formData: FormData): Promise<LoginActionState> => {
       const email = String(formData.get('email') ?? '');
       const password = String(formData.get('password') ?? '');
-      const supabase = createClient();
-      const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-
-      if (authError) {
-        return { error: authError.message };
-      }
-
-      window.location.assign(ROUTERS.DASHBOARD);
-      return { error: null };
+      const { error } = await handleLogin(email, password);
+      return { error };
     },
     initialLoginState
   );
