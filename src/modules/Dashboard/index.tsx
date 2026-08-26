@@ -105,9 +105,7 @@ export default function Dashboard(): React.ReactElement {
           >
             <Bell size={18} strokeWidth={1.8} />
           </ActionIcon>
-          <Button leftSection={<Plus size={17} />} className={styles.primaryButton}>
-            New project
-          </Button>
+          <Button leftSection={<Plus size={17} />}>New project</Button>
         </Group>
       </header>
 

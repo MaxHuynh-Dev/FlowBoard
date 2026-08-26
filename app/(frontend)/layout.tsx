@@ -9,6 +9,7 @@ import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import type React from 'react';
+import { AuthProvider } from '@/providers/AuthProvider';
 
 export const metadata: Metadata = DEFAULT_METADATA;
 
@@ -33,7 +34,9 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${inter.variable} ${raleway.variable}`}>
-        <MainLayout>{children}</MainLayout>
+        <AuthProvider>
+          <MainLayout>{children}</MainLayout>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -3,5 +3,7 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://api.example.c
 export const PROD_ENV = 'production';
 export const DEV_ENV = 'development';
 
-export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-export const SUPABASE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+export const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-supabase-url.supabase.co';
+export const SUPABASE_PUBLISHABLE_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'your-supabase-publishable-key';
