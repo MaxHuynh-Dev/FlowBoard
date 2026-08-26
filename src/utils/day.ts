@@ -1,27 +1,36 @@
-import { format } from 'date-fns';
-import dayjs from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
-
 class DAY_UTILS {
-  constructor() {
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
+  private formatDateParts(
+    date: Date,
+    options: Intl.DateTimeFormatOptions,
+    separator: string
+  ): string {
+    const parts = new Intl.DateTimeFormat('en-US', options).formatToParts(date);
+    const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+    return `${values.month}${separator}${values.day}${separator}${values.year}`;
   }
 
   formatDate(date: Date): string {
-    const typeFormat = 'MM/dd/yyyy';
-    return format(date, typeFormat);
+    return this.formatDateParts(date, { day: '2-digit', month: '2-digit', year: 'numeric' }, '/');
   }
 
   formatDateVN(date: Date): string {
-    const typeFormat = 'dd/MM/yyyy';
-    return format(date, typeFormat);
+    const formattedDate = this.formatDateParts(
+      date,
+      { day: '2-digit', month: '2-digit', year: 'numeric' },
+      '/'
+    );
+    const [month, day, year] = formattedDate.split('/');
+    return `${day}/${month}/${year}`;
   }
 
   formatDateVNPlusTime(date: Date): string {
-    const typeFormat = 'dd/MM/yyyy HH:mm';
-    return format(date, typeFormat);
+    const formattedDate = this.formatDateVN(date);
+    const time = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
+    }).format(date);
+    return `${formattedDate} ${time}`;
   }
 
   convertToVNTimeZone(date: Date): string {
@@ -36,8 +45,36 @@ class DAY_UTILS {
   //   return localDate.format('MM-DD-YYYY HH:mm:ss');
   // }
 
+  getCurrentDate(): string {
+    return new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    }).format(new Date());
+  }
+
+  getCurrentTimeOfDay(date: Date = new Date()): 'morning' | 'afternoon' | 'evening' {
+    const hour = date.getHours();
+
+    if (hour < 12) {
+      return 'morning';
+    }
+
+    if (hour < 18) {
+      return 'afternoon';
+    }
+
+    return 'evening';
+  }
+
   getCurrentTime(date: number): string {
-    return dayjs(date).tz('Europe/London').format('HH:mm');
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
+    }).format(date);
   }
 }
 
