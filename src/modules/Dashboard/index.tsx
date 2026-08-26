@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import type React from 'react';
 import styles from './Dashboard.module.scss';
+import Header from './section/Header';
 
 const projects = [
   { name: 'Website redesign', team: 'Product & design', progress: 78, tone: 'violet' },
@@ -86,28 +87,7 @@ const stats: Array<{
 export default function Dashboard(): React.ReactElement {
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <div>
-          <Text className={styles.kicker}>Tuesday, August 25, 2026</Text>
-          <Title order={1}>
-            Good morning, Jane <span aria-hidden="true">✦</span>
-          </Title>
-          <Text className={styles.subtitle}>
-            Here&apos;s what&apos;s happening across your workspace.
-          </Text>
-        </div>
-        <Group className={styles.headerActions} gap="sm">
-          <ActionIcon
-            aria-label="Notifications"
-            className={styles.iconButton}
-            size="lg"
-            variant="default"
-          >
-            <Bell size={18} strokeWidth={1.8} />
-          </ActionIcon>
-          <Button leftSection={<Plus size={17} />}>New project</Button>
-        </Group>
-      </header>
+      <Header />
 
       <section className={styles.stats} aria-label="Workspace overview">
         {stats.map(({ label, value, change, color, Icon }) => (
