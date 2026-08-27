@@ -1,6 +1,7 @@
 'use client';
 
-import { Stepper } from '@mantine/core';
+import { Box, Stepper, Text } from '@mantine/core';
+import { AnimatePresence, motion } from 'framer-motion';
 import type React from 'react';
 import { useState } from 'react';
 import AccessDashboard from './AccessDashboard';
@@ -8,21 +9,14 @@ import FormSignUp from './Form';
 import styles from './SignUp.module.scss';
 import VerifyEmail from './VerifyEmail';
 
+const STEPPERS = [
+  { id: 0, label: 'Step 1', content: <FormSignUp />, description: 'Create an account' },
+  { id: 1, label: 'Step 2', content: <VerifyEmail />, description: 'Verify email' },
+  { id: 2, label: 'Step 3', content: <AccessDashboard />, description: 'Get full access' }
+];
+
 export default function SignUp(): React.ReactElement {
   const [active, setActive] = useState(0);
-
-  function handleStepChange(step: number): React.ReactElement {
-    switch (step) {
-      case 0:
-        return <FormSignUp />;
-      case 1:
-        return <VerifyEmail />;
-      case 2:
-        return <AccessDashboard />;
-      default:
-        return <FormSignUp />;
-    }
-  }
 
   return (
     <main className={styles.page}>
@@ -35,16 +29,33 @@ export default function SignUp(): React.ReactElement {
             </div>
             <span className={styles.eyebrow}>A clearer way to move work forward</span>
             <h1>Start your best work here.</h1>
-            <p>Create a focused home for your projects, tasks, and team conversations.</p>
+            <Text>Create a focused home for your projects, tasks, and team conversations.</Text>
           </div>
           <Stepper active={active} onStepClick={setActive} orientation="vertical">
-            <Stepper.Step label="Step 1" description="Create an account" />
-            <Stepper.Step label="Step 2" description="Verify email" />
-            <Stepper.Step label="Step 3" description="Get full access" />
+            {STEPPERS.map((step) => (
+              <Stepper.Step key={step.id} label={step.label} description={step.description} />
+            ))}
           </Stepper>
         </section>
 
-        {handleStepChange(active)}
+        <Box className={styles.formPanel}>
+          <AnimatePresence mode="wait">
+            {STEPPERS.map(
+              (tab) =>
+                active === tab.id && (
+                  <motion.div
+                    key={tab.id}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {tab.content}
+                  </motion.div>
+                )
+            )}
+          </AnimatePresence>
+        </Box>
       </div>
     </main>
   );

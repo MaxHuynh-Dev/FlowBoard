@@ -32,7 +32,7 @@ function FormSignUp(): React.ReactElement {
   );
 
   return (
-    <Paper className={styles.formPanel} radius={0} shadow="none">
+    <Paper radius={0} shadow="none">
       <div className={styles.heading}>
         <span className={styles.formEyebrow}>Create account</span>
         <h2>Join FlowBoard</h2>
