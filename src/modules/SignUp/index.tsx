@@ -16,29 +16,24 @@ const STEPPERS = [
 ];
 
 export default function SignUp(): React.ReactElement {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(0);
 
   return (
     <main className={styles.page}>
       <div className={styles.shell}>
         <section className={styles.intro}>
-          <div className={styles.introTop}>
-            <div className={styles.logo}>
+          <Box className={styles.introTop}>
+            <Box className={styles.logo}>
               <span className={styles.logoMark}>F</span>
               <span>flowboard</span>
-            </div>
+            </Box>
             <span className={styles.eyebrow}>A clearer way to move work forward</span>
             <h1>Start your best work here.</h1>
             <Text>Create a focused home for your projects, tasks, and team conversations.</Text>
-          </div>
+          </Box>
           <Stepper active={active} onStepClick={setActive} orientation="vertical">
             {STEPPERS.map((step) => (
-              <Stepper.Step
-                key={step.id}
-                label={step.label}
-                description={step.description}
-                loading={STEPPERS[1].id === active}
-              />
+              <Stepper.Step key={step.id} label={step.label} description={step.description} />
             ))}
           </Stepper>
         </section>
