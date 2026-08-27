@@ -108,6 +108,117 @@
   background: #fff;
 }
 
+.heading {
+  margin-bottom: 30px;
+}
+
+.formEyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #687975;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin: 0 0 9px;
+  color: #123238;
+  font-family: var(--font-raleway);
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.heading p {
+  margin: 0;
+  color: #687975;
+  font-size: 14px;
+}
+
+.socialButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.socialButton {
+  height: 44px;
+  color: #123238;
+  border-color: #dce3de;
+  border-radius: 7px;
+}
+
+.socialIcon {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  color: #29433f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input {
+  height: 44px;
+  color: #000;
+  border-color: #dce3de;
+  border-radius: 7px;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.error {
+  padding: 10px 12px;
+  color: #fecdd3;
+  font-size: 13px;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.32);
+  border-radius: 6px;
+}
+
+.success {
+  padding: 10px 12px;
+  color: #315e3b;
+  font-size: 13px;
+  background: #eef8e7;
+  border: 1px solid #cde6bd;
+  border-radius: 6px;
+}
+
+.submit {
+  height: 44px;
+  color: #fff;
+  background: #228be6;
+  border: 0;
+  border-radius: 7px;
+}
+
+.submit:hover {
+  background: #228be6;
+}
+
+.signup {
+  margin-top: 28px;
+  color: #687975;
+  font-size: 13px;
+  text-align: center;
+}
+
 @media (max-width: 760px) {
   .page {
     min-height: 100vh;
@@ -133,5 +244,11 @@
 
   .formPanel {
     padding: 32px 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .socialButtons {
+    grid-template-columns: 1fr;
   }
 }

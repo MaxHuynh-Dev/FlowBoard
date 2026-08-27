@@ -3,11 +3,26 @@
 import { Stepper } from '@mantine/core';
 import type React from 'react';
 import { useState } from 'react';
+import AccessDashboard from './AccessDashboard';
 import FormSignUp from './Form';
 import styles from './SignUp.module.scss';
+import VerifyEmail from './VerifyEmail';
 
 export default function SignUp(): React.ReactElement {
   const [active, setActive] = useState(0);
+
+  function handleStepChange(step: number): React.ReactElement {
+    switch (step) {
+      case 0:
+        return <FormSignUp />;
+      case 1:
+        return <VerifyEmail />;
+      case 2:
+        return <AccessDashboard />;
+      default:
+        return <FormSignUp />;
+    }
+  }
 
   return (
     <main className={styles.page}>
@@ -29,7 +44,7 @@ export default function SignUp(): React.ReactElement {
           </Stepper>
         </section>
 
-        <FormSignUp />
+        {handleStepChange(active)}
       </div>
     </main>
   );
