@@ -5,3 +5,6 @@ export enum ROUTERS {
   DASHBOARD = '/dashboard',
   PROFILE = '/profile'
 }
+
+export const PUBLISH_ROUTES = [ROUTERS.LOGIN, ROUTERS.SIGN_UP, ROUTERS.HOME];
+export const AUTH_ROUTES = [ROUTERS.DASHBOARD, ROUTERS.PROFILE];

@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from '@/constants/envs';
-import { ROUTERS } from '@/enums/router';
+import { AUTH_ROUTES, ROUTERS } from '@/enums/router';
 
 export const updateSession = async (request: NextRequest) => {
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
@@ -43,10 +43,7 @@ export const updateSession = async (request: NextRequest) => {
     return NextResponse.redirect(url);
   }
 
-  if (
-    user &&
-    (request.nextUrl.pathname === ROUTERS.LOGIN || request.nextUrl.pathname === ROUTERS.SIGN_UP)
-  ) {
+  if (user && AUTH_ROUTES.includes(request.nextUrl.pathname as ROUTERS)) {
     url.pathname = ROUTERS.DASHBOARD;
     return NextResponse.redirect(url);
   }

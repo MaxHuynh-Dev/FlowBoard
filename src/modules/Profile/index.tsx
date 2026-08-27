@@ -1,87 +1,20 @@
 'use client';
 
-import {
-  Alert,
-  Avatar,
-  Badge,
-  Card,
-  Divider,
-  Group,
-  Loader,
-  Stack,
-  Text,
-  Title
-} from '@mantine/core';
+import { Badge, Card, Divider, Group, Stack, Text, Title } from '@mantine/core';
 import type { User } from '@supabase/supabase-js';
-import { AlertCircle, CalendarDays, Mail, ShieldCheck } from 'lucide-react';
+import { CalendarDays, Mail, ShieldCheck } from 'lucide-react';
 import type React from 'react';
-import { useEffect, useState } from 'react';
 import AvatarUser from '@/components/AvatarUser';
+import { useUserStore } from '@/stores/userStore';
 import { dayUtils } from '@/utils/day';
-import { createClient } from '@/utils/supabase/client';
 import styles from './Profile.module.scss';
 
-function getDisplayName(user: User): string {
-  return user.user_metadata.full_name || user.user_metadata.name || user.email || 'User';
+function getDisplayName(user: User | null): string {
+  return user?.user_metadata.full_name || user?.user_metadata.name || user?.email || 'User';
 }
 
 function Profile(): React.ReactElement {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    const supabase = createClient();
-
-    supabase.auth.getUser().then(({ data, error: authError }) => {
-      if (!isMounted) return;
-
-      if (authError) {
-        setError(authError.message);
-      } else {
-        setUser(data.user);
-      }
-      setLoading(false);
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  if (loading) {
-    return (
-      <main className={styles.page}>
-        <div className={styles.loading}>
-          <Loader color="violet" size="sm" />
-          <Text c="dimmed" size="sm">
-            Loading your profile...
-          </Text>
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className={styles.page}>
-        <Alert color="red" icon={<AlertCircle size={18} />} title="Unable to load profile">
-          {error}
-        </Alert>
-      </main>
-    );
-  }
-
-  if (!user) {
-    return (
-      <main className={styles.page}>
-        <Alert color="yellow" icon={<AlertCircle size={18} />} title="No signed-in user">
-          Sign in to view your profile.
-        </Alert>
-      </main>
-    );
-  }
+  const { user } = useUserStore((state) => state);
 
   const displayName = getDisplayName(user);
 
@@ -104,7 +37,7 @@ function Profile(): React.ReactElement {
             <Title order={2}>{displayName}</Title>
             <Group c="dimmed" gap="xs" mt={4}>
               <Mail size={15} />
-              <Text size="sm">{user.email || 'No email address'}</Text>
+              <Text size="sm">{user?.email || 'No email address'}</Text>
             </Group>
           </div>
         </Group>
@@ -119,7 +52,7 @@ function Profile(): React.ReactElement {
               User ID
             </Text>
             <Text className={styles.detailValue} size="sm">
-              {user.id}
+              {user?.id}
             </Text>
           </div>
           <div className={styles.detailRow}>
@@ -129,14 +62,16 @@ function Profile(): React.ReactElement {
                 Joined
               </Text>
             </Group>
-            <Text size="sm">{dayUtils.formatDate(user.created_at)}</Text>
+            <Text size="sm">
+              {user?.created_at ? dayUtils.formatDate(user.created_at) : 'Not available'}
+            </Text>
           </div>
           <div className={styles.detailRow}>
             <Text c="dimmed" size="sm">
               Last sign in
             </Text>
             <Text size="sm">
-              {user.last_sign_in_at ? dayUtils.formatDate(user.last_sign_in_at) : 'Not available'}
+              {user?.last_sign_in_at ? dayUtils.formatDate(user.last_sign_in_at) : 'Not available'}
             </Text>
           </div>
         </Stack>
