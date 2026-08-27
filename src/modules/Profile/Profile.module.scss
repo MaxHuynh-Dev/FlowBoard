@@ -1,0 +1,72 @@
+.page {
+    min-height: 100%;
+    padding: clamp(24px, 4vw, 56px);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: 860px;
+    margin: 0 auto 32px;
+}
+
+.eyebrow {
+    margin-bottom: 6px;
+    color: #7950f2;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.profileCard,
+.detailsCard {
+    max-width: 860px;
+    margin: 0 auto 20px;
+    background: #fff;
+}
+
+.profileCard {
+    // background: linear-gradient(120deg, #fff 0%, #f2edff 100%);
+}
+
+.detailRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.detailValue {
+    max-width: 65%;
+    overflow: hidden;
+    color: #495057;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 280px;
+}
+
+@media (max-width: 540px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .detailRow {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .detailValue {
+        max-width: 100%;
+    }
+}

@@ -1,27 +1,18 @@
 'use client';
 
-import { Avatar as AvatarDicebear, Style } from '@dicebear/core';
-import lorelei from '@dicebear/styles/micah.json' with { type: 'json' };
-import { Avatar, Flex, Menu, Menubar, Text } from '@mantine/core';
+import { Flex, Menu, Menubar, Text } from '@mantine/core';
 import { CircleUserRound, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
+import AvatarUser from '@/components/AvatarUser';
 import { ROUTERS } from '@/enums/router';
 import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import { useUserStore } from '@/stores/userStore';
 import styles from './User.module.scss';
 
-const style = new Style(lorelei);
-
 export default function User(): React.ReactElement {
   const { user } = useUserStore((state) => state);
   const { handleLogout } = useAuthEmailProvider();
-  const dataUri = new AvatarDicebear(style, {
-    seed: user?.user_metadata.full_name,
-    size: 228,
-    backgroundColorFill: 'linear',
-    backgroundColor: ['#ddd8d8']
-  }).toDataUri();
 
   return (
     <Menubar position="bottom-end">
@@ -32,13 +23,7 @@ export default function User(): React.ReactElement {
       >
         <Menubar.Target className={styles.user}>
           <Flex w="100%" align="center" gap="sm" className={styles.user_inner}>
-            <Avatar
-              src={user?.user_metadata.avatar_url || dataUri}
-              radius="xl"
-              size={35}
-              alt={user?.user_metadata.full_name || 'Guest User'}
-            />
-
+            <AvatarUser />
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
                 {user?.user_metadata.full_name || 'Guest User'}

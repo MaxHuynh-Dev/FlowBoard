@@ -9,10 +9,6 @@ class DAY_UTILS {
     return `${values.month}${separator}${values.day}${separator}${values.year}`;
   }
 
-  formatDate(date: Date): string {
-    return this.formatDateParts(date, { day: '2-digit', month: '2-digit', year: 'numeric' }, '/');
-  }
-
   formatDateVN(date: Date): string {
     const formattedDate = this.formatDateParts(
       date,
@@ -75,6 +71,14 @@ class DAY_UTILS {
       minute: '2-digit',
       hourCycle: 'h23'
     }).format(date);
+  }
+
+  formatDate(value: string): string {
+    return new Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(new Date(value));
   }
 }
 
