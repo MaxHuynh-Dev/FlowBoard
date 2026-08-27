@@ -3,7 +3,7 @@
 import { Box, Stepper, Text } from '@mantine/core';
 import { AnimatePresence, motion } from 'framer-motion';
 import type React from 'react';
-import { useState } from 'react';
+import { useStatusSignUpStore } from '@/stores/statusSignUpStore';
 import AccessDashboard from './AccessDashboard';
 import FormSignUp from './Form';
 import styles from './SignUp.module.scss';
@@ -16,7 +16,7 @@ const STEPPERS = [
 ];
 
 export default function SignUp(): React.ReactElement {
-  const [active, setActive] = useState(2);
+  const { stepActive, setStepActive } = useStatusSignUpStore((state) => state);
 
   return (
     <main className={styles.page}>
@@ -31,7 +31,7 @@ export default function SignUp(): React.ReactElement {
             <h1>Start your best work here.</h1>
             <Text>Create a focused home for your projects, tasks, and team conversations.</Text>
           </Box>
-          <Stepper active={active} onStepClick={setActive} orientation="vertical">
+          <Stepper active={stepActive} onStepClick={setStepActive} orientation="vertical">
             {STEPPERS.map((step) => (
               <Stepper.Step key={step.id} label={step.label} description={step.description} />
             ))}
@@ -42,7 +42,7 @@ export default function SignUp(): React.ReactElement {
           <AnimatePresence mode="wait">
             {STEPPERS.map(
               (tab) =>
-                active === tab.id && (
+                stepActive === tab.id && (
                   <motion.div
                     key={tab.id}
                     initial={{ opacity: 0, x: 10 }}
