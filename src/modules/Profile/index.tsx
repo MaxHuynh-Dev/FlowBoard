@@ -10,12 +10,11 @@ import { dayUtils } from '@/utils/day';
 import styles from './Profile.module.scss';
 
 function getDisplayName(user: User | null): string {
-  return user?.user_metadata.full_name || user?.user_metadata.name || user?.email || 'User';
+  return user?.user_metadata.display_name || 'Guest User';
 }
 
 function Profile(): React.ReactElement {
   const { user } = useUserStore((state) => state);
-
   const displayName = getDisplayName(user);
 
   return (

@@ -19,11 +19,17 @@ export default function SignUp(): React.ReactElement {
 
   const [signUpState, signUpAction, emailLoading] = useActionState(
     async (_previousState: SignUpActionState, formData: FormData): Promise<SignUpActionState> => {
+      const displayName = String(formData.get('displayName') ?? '').trim();
       const email = String(formData.get('email') ?? '').trim();
       const password = String(formData.get('password') ?? '');
       const confirmPassword = String(formData.get('confirmPassword') ?? '');
 
-      const { error, success } = await handleSignUp(email, password, confirmPassword);
+      const { error, success } = await handleSignUp({
+        email,
+        displayName,
+        password,
+        confirmPassword
+      });
       return { error, success };
     },
     initialSignUpState
@@ -101,6 +107,14 @@ export default function SignUp(): React.ReactElement {
           <Divider label="or sign up with email" labelPosition="center" mb="lg" />
 
           <form action={signUpAction} className={styles.form}>
+            <TextInput
+              classNames={{ input: styles.input, label: styles.label }}
+              label="Display name"
+              name="displayName"
+              placeholder="John Doe"
+              required
+              type="text"
+            />
             <TextInput
               classNames={{ input: styles.input, label: styles.label }}
               label="Email address"

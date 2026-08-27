@@ -3,12 +3,17 @@ import { ROUTERS } from '@/enums/router';
 import { useUserStore } from '@/stores/userStore';
 import { createClient } from '@/utils/supabase/client';
 
+type TSignUpField = {
+  email: string;
+  displayName: string;
+  password: string;
+  confirmPassword: string;
+};
+
 type UseAuthEmailProvider = {
   handleLogin: (email: string, password: string) => Promise<{ error: string | null }>;
   handleSignUp: (
-    email: string,
-    password: string,
-    confirmPassword: string
+    signUpField: TSignUpField
   ) => Promise<{ error: string | null; success: string | null }>;
   handleLogout: () => Promise<{ error: string | null }>;
 };
@@ -28,10 +33,10 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
   };
 
   const handleSignUp = async (
-    email: string,
-    password: string,
-    confirmPassword: string
+    signUpField: TSignUpField
   ): Promise<{ error: string | null; success: string | null }> => {
+    const { email, displayName, password, confirmPassword } = signUpField;
+
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return { error: 'Passwords do not match', success: null };
@@ -46,7 +51,10 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${ROUTERS.DASHBOARD}`
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${ROUTERS.DASHBOARD}`,
+        data: {
+          display_name: displayName
+        }
       }
     });
 

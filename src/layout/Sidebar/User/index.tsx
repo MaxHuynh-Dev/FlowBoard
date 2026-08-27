@@ -26,7 +26,7 @@ export default function User(): React.ReactElement {
             <AvatarUser />
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                {user?.user_metadata.full_name || 'Guest User'}
+                {user?.user_metadata.display_name || 'Guest User'}
               </Text>
 
               <Text c="dimmed" size="xs">
