@@ -16,7 +16,7 @@ const STEPPERS = [
 ];
 
 export default function SignUp(): React.ReactElement {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
 
   return (
     <main className={styles.page}>
@@ -33,7 +33,12 @@ export default function SignUp(): React.ReactElement {
           </div>
           <Stepper active={active} onStepClick={setActive} orientation="vertical">
             {STEPPERS.map((step) => (
-              <Stepper.Step key={step.id} label={step.label} description={step.description} />
+              <Stepper.Step
+                key={step.id}
+                label={step.label}
+                description={step.description}
+                loading={STEPPERS[1].id === active}
+              />
             ))}
           </Stepper>
         </section>

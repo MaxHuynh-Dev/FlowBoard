@@ -71,6 +71,7 @@ function FormSignUp(): React.ReactElement {
           classNames={{ input: styles.input, label: styles.label }}
           label="Display name"
           name="displayName"
+          disabled={loadingProvider !== null || emailLoading}
           placeholder="John Doe"
           required
           type="text"
@@ -79,6 +80,7 @@ function FormSignUp(): React.ReactElement {
           classNames={{ input: styles.input, label: styles.label }}
           label="Email address"
           name="email"
+          disabled={loadingProvider !== null || emailLoading}
           placeholder="you@example.com"
           required
           type="email"
@@ -87,6 +89,7 @@ function FormSignUp(): React.ReactElement {
           classNames={{ input: styles.input, label: styles.label }}
           label="Password"
           name="password"
+          disabled={loadingProvider !== null || emailLoading}
           placeholder="At least 6 characters"
           required
         />
@@ -94,6 +97,7 @@ function FormSignUp(): React.ReactElement {
           classNames={{ input: styles.input, label: styles.label }}
           label="Confirm password"
           name="confirmPassword"
+          disabled={loadingProvider !== null || emailLoading}
           placeholder="Repeat your password"
           required
         />
@@ -110,12 +114,6 @@ function FormSignUp(): React.ReactElement {
             Create account
           </Button>
         </div>
-        {/* {signUpState.error || oauthError ? (
-              <div className={styles.error}>{signUpState.error ?? oauthError}</div>
-            ) : null}
-            {signUpState.success ? (
-              <div className={styles.success}>{signUpState.success}</div>
-            ) : null} */}
       </form>
     </Paper>
   );
