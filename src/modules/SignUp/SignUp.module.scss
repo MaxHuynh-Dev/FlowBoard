@@ -1,0 +1,254 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100vh;
+  place-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 32px 20px;
+}
+
+.page::before {
+  position: absolute;
+  z-index: -2;
+  inset: -28px;
+  content: "";
+  background-image: url("https://images.unsplash.com/photo-1580339633239-fc0b5fe7cbea?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-position: center;
+  background-size: cover;
+  filter: blur(5px);
+}
+
+.page::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  width: min(100%, 1040px);
+  overflow: hidden;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 28px 70px rgba(18, 38, 42, 0.14);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 620px;
+  padding: 42px;
+  color: #f8faf6;
+  background: #123238;
+}
+
+.introTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 74px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.logoMark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  background: #228be6;
+  border-radius: 8px;
+  place-items: center;
+  transform: rotate(-6deg);
+}
+
+.eyebrow {
+  color: #228be6;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.intro h1 {
+  max-width: 450px;
+  margin: 18px 0 14px;
+  color: #f8faf6;
+  font-family: var(--font-raleway);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 0.98;
+}
+
+.intro p {
+  max-width: 380px;
+  margin: 0;
+  color: rgba(248, 250, 246, 0.7);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.formPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 48px;
+  background: #fff;
+}
+
+.heading {
+  margin-bottom: 30px;
+}
+
+.formEyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #687975;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin: 0 0 9px;
+  color: #123238;
+  font-family: var(--font-raleway);
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.heading p {
+  margin: 0;
+  color: #687975;
+  font-size: 14px;
+}
+
+.socialButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.socialButton {
+  height: 44px;
+  color: #123238;
+  border-color: #dce3de;
+  border-radius: 7px;
+}
+
+.socialIcon {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  color: #29433f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input {
+  height: 44px;
+  color: #000;
+  border-color: #dce3de;
+  border-radius: 7px;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.error {
+  padding: 10px 12px;
+  color: #fecdd3;
+  font-size: 13px;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.32);
+  border-radius: 6px;
+}
+
+.success {
+  padding: 10px 12px;
+  color: #315e3b;
+  font-size: 13px;
+  background: #eef8e7;
+  border: 1px solid #cde6bd;
+  border-radius: 6px;
+}
+
+.submit {
+  height: 44px;
+  color: #fff;
+  background: #228be6;
+  border: 0;
+  border-radius: 7px;
+}
+
+.submit:hover {
+  background: #228be6;
+}
+
+.signup {
+  margin-top: 28px;
+  color: #687975;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .page {
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .shell {
+    display: block;
+  }
+
+  .intro {
+    min-height: auto;
+    padding: 32px 28px;
+  }
+
+  .logo {
+    margin-bottom: 42px;
+  }
+
+  .preview {
+    display: none;
+  }
+
+  .formPanel {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .socialButtons {
+    grid-template-columns: 1fr;
+  }
+}
