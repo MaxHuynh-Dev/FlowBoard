@@ -16,7 +16,7 @@ const STEPPERS = [
 ];
 
 export default function SignUp(): React.ReactElement {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
 
   return (
     <main className={styles.page}>
