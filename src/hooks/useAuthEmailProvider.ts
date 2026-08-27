@@ -1,5 +1,7 @@
 import { toast } from 'react-toastify';
 import { ROUTERS } from '@/enums/router';
+import { buildVerifyEmailRedirect, SIGN_UP_STEP } from '@/enums/signUpStep';
+import { useStatusSignUpStore } from '@/stores/statusSignUpStore';
 import { useUserStore } from '@/stores/userStore';
 import { createClient } from '@/utils/supabase/client';
 
@@ -15,12 +17,14 @@ type UseAuthEmailProvider = {
   handleSignUp: (
     signUpField: TSignUpField
   ) => Promise<{ error: string | null; success: string | null }>;
+  handleResendVerifyEmail: (email: string) => Promise<{ error: string | null }>;
   handleLogout: () => Promise<{ error: string | null }>;
 };
 
 const useAuthEmailProvider = (): UseAuthEmailProvider => {
   const supabase = createClient();
   const { clearUser } = useUserStore((state) => state);
+  const { setStepActive, setPendingEmail } = useStatusSignUpStore((state) => state);
 
   const handleLogin = async (email: string, password: string) => {
     const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
@@ -51,7 +55,7 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${ROUTERS.DASHBOARD}`,
+        emailRedirectTo: buildVerifyEmailRedirect(window.location.origin),
         data: {
           display_name: displayName
         }
@@ -59,20 +63,40 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
     });
 
     if (authError) {
+      toast.error(authError.message);
       return { error: authError.message, success: null };
     }
 
-    if (!data.session) {
-      toast.success('Account created. Check your email to confirm your account.');
-      window.location.assign(ROUTERS.LOGIN);
+    setPendingEmail(email);
 
-      return {
-        error: null,
-        success: 'Account created. Check your email to confirm your account.'
-      };
+    if (!data.session) {
+      const success = 'Account created. Check your email to confirm your account.';
+      toast.success(success);
+      setStepActive(SIGN_UP_STEP.VERIFY_EMAIL);
+
+      return { error: null, success };
     }
 
-    return { error: null, success: null };
+    window.location.assign(ROUTERS.DASHBOARD);
+    return { error: null, success: 'Account created.' };
+  };
+
+  const handleResendVerifyEmail = async (email: string) => {
+    const { error: resendError } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: {
+        emailRedirectTo: buildVerifyEmailRedirect(window.location.origin)
+      }
+    });
+
+    if (resendError) {
+      toast.error(resendError.message);
+      return { error: resendError.message };
+    }
+
+    toast.success('Verification email sent again.');
+    return { error: null };
   };
 
   const handleLogout = async () => {
@@ -88,7 +112,7 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
     }
   };
 
-  return { handleLogin, handleSignUp, handleLogout };
+  return { handleLogin, handleSignUp, handleResendVerifyEmail, handleLogout };
 };
 
 export default useAuthEmailProvider;

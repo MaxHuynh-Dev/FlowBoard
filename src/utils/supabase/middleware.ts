@@ -45,6 +45,7 @@ export const updateSession = async (request: NextRequest) => {
 
   if (user && PUBLISH_ROUTES.includes(request.nextUrl.pathname as ROUTERS)) {
     url.pathname = ROUTERS.DASHBOARD;
+    url.search = '';
     return NextResponse.redirect(url);
   }
 
