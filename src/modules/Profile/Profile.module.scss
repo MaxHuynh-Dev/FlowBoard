@@ -4,10 +4,6 @@
 }
 
 .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
     max-width: 860px;
     margin: 0 auto 32px;
 }
@@ -28,17 +24,6 @@
     background: #fff;
 }
 
-.profileCard {
-    // background: linear-gradient(120deg, #fff 0%, #f2edff 100%);
-}
-
-.detailRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
 .detailValue {
     max-width: 65%;
     overflow: hidden;
@@ -47,25 +32,7 @@
     white-space: nowrap;
 }
 
-.loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 280px;
-}
-
 @media (max-width: 540px) {
-    .header {
-        flex-direction: column;
-    }
-
-    .detailRow {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 4px;
-    }
-
     .detailValue {
         max-width: 100%;
     }

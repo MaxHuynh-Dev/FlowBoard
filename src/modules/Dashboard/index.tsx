@@ -2,11 +2,15 @@ import {
   ActionIcon,
   Avatar,
   Badge,
+  Box,
   Button,
   Card,
+  Center,
+  Flex,
   Group,
   Progress,
   RingProgress,
+  SimpleGrid,
   Stack,
   Text,
   ThemeIcon,
@@ -15,14 +19,12 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import {
   ArrowUpRight,
-  Bell,
   CalendarDays,
   Check,
   ChevronRight,
   CircleDashed,
   Clock3,
   FolderKanban,
-  Plus,
   Sparkles,
   Users
 } from 'lucide-react';
@@ -86,48 +88,60 @@ const stats: Array<{
 
 export default function Dashboard(): React.ReactElement {
   return (
-    <div className={styles.page}>
+    <Box className={styles.page}>
       <Header />
 
-      <section className={styles.stats} aria-label="Workspace overview">
-        {stats.map(({ label, value, change, color, Icon }) => (
-          <Card className={styles.statCard} key={label} padding="lg">
-            <Group justify="space-between" align="flex-start">
-              <div>
-                <Text className={styles.statLabel}>{label}</Text>
-                <Text className={styles.statValue}>{value}</Text>
-              </div>
-              <ThemeIcon className={styles.statIcon} color={color} variant="light">
-                <Icon size={19} />
-              </ThemeIcon>
+      <Box aria-label="Workspace overview" component="section">
+        <SimpleGrid className={styles.stats} cols={{ base: 2, md: 4 }} spacing={16}>
+          {stats.map(({ label, value, change, color, Icon }) => (
+            <Card className={styles.statCard} key={label} padding="lg">
+              <Group align="flex-start" justify="space-between">
+                <Box>
+                  <Text className={styles.statLabel}>{label}</Text>
+                  <Text className={styles.statValue}>{value}</Text>
+                </Box>
+                <ThemeIcon className={styles.statIcon} color={color} variant="light">
+                  <Icon size={19} />
+                </ThemeIcon>
+              </Group>
+              <Text className={styles.statChange}>
+                <strong>{change}</strong>{' '}
+                {label === 'Team members' ? 'new this month' : 'from last week'}
+              </Text>
+            </Card>
+          ))}
+          <Card className={styles.statCard} padding="lg">
+            <Group align="flex-start" justify="space-between">
+              <Box>
+                <Text className={styles.statLabel}>Productivity</Text>
+                <Text className={styles.statValue}>87%</Text>
+              </Box>
+              <RingProgress sections={[{ value: 87, color: 'lime' }]} size={44} thickness={5} />
             </Group>
             <Text className={styles.statChange}>
-              <strong>{change}</strong>{' '}
-              {label === 'Team members' ? 'new this month' : 'from last week'}
+              <strong>+4.2%</strong> this week
             </Text>
           </Card>
-        ))}
-        <Card className={styles.statCard} padding="lg">
-          <Group justify="space-between" align="flex-start">
-            <div>
-              <Text className={styles.statLabel}>Productivity</Text>
-              <Text className={styles.statValue}>87%</Text>
-            </div>
-            <RingProgress sections={[{ value: 87, color: 'lime' }]} size={44} thickness={5} />
-          </Group>
-          <Text className={styles.statChange}>
-            <strong>+4.2%</strong> this week
-          </Text>
-        </Card>
-      </section>
+        </SimpleGrid>
+      </Box>
 
-      <section className={styles.contentGrid}>
-        <Card className={styles.panel} padding="xl">
-          <Group className={styles.panelHeading} justify="space-between">
-            <div>
+      <Flex
+        className={styles.contentGrid}
+        component="section"
+        direction={{ base: 'column', md: 'row' }}
+        gap={16}
+      >
+        <Card
+          className={styles.panel}
+          flex={{ base: '0 0 auto', md: '1.08 1 0' }}
+          miw={0}
+          padding="xl"
+        >
+          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+            <Box>
               <Title order={3}>Project pulse</Title>
               <Text className={styles.panelHint}>Keep an eye on your team&apos;s momentum.</Text>
-            </div>
+            </Box>
             <Button
               className={styles.linkButton}
               rightSection={<ArrowUpRight size={15} />}
@@ -138,59 +152,64 @@ export default function Dashboard(): React.ReactElement {
           </Group>
           <Stack gap="xl">
             {projects.map((project) => (
-              <div className={styles.project} key={project.name}>
+              <Box key={project.name}>
                 <Group justify="space-between" mb={8}>
-                  <div>
+                  <Box>
                     <Text className={styles.projectName}>{project.name}</Text>
                     <Text className={styles.projectTeam}>{project.team}</Text>
-                  </div>
+                  </Box>
                   <Text className={styles.percent}>{project.progress}%</Text>
                 </Group>
                 <Progress
                   className={styles.progress}
                   color={project.tone}
-                  value={project.progress}
                   size="sm"
+                  value={project.progress}
                 />
-              </div>
+              </Box>
             ))}
           </Stack>
-          <div className={styles.insight}>
+          <Group align="center" className={styles.insight} gap={9} wrap="nowrap">
             <ThemeIcon color="yellow" radius="xl" size="sm" variant="light">
               <Sparkles size={14} />
             </ThemeIcon>
-            <Text>
+            <Text inherit>
               <strong>Nice pace.</strong> Your team is ahead of schedule on 4 projects.
             </Text>
-          </div>
+          </Group>
         </Card>
 
-        <Card className={styles.panel} padding="xl">
-          <Group className={styles.panelHeading} justify="space-between">
-            <div>
+        <Card
+          className={styles.panel}
+          flex={{ base: '0 0 auto', md: '0.92 1 0' }}
+          miw={{ base: 0, md: 360 }}
+          padding="xl"
+        >
+          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+            <Box>
               <Title order={3}>My tasks</Title>
               <Text className={styles.panelHint}>4 tasks need your attention.</Text>
-            </div>
-            <ActionIcon
-              aria-label="Open task calendar"
-              className={styles.iconButton}
-              variant="default"
-            >
+            </Box>
+            <ActionIcon aria-label="Open task calendar" variant="default">
               <CalendarDays size={17} />
             </ActionIcon>
           </Group>
-          <Stack className={styles.taskList} gap={0}>
+          <Stack gap={0}>
             {tasks.map((task) => (
-              <div className={styles.task} key={task.title}>
-                <span className={task.done ? styles.taskCheckDone : styles.taskCheck}>
+              <Flex align="center" className={styles.task} gap={11} key={task.title}>
+                <Center
+                  className={task.done ? styles.taskCheckDone : styles.taskCheck}
+                  component="span"
+                  flex="0 0 18px"
+                >
                   <CircleDashed size={17} />
-                </span>
-                <div className={styles.taskBody}>
+                </Center>
+                <Box flex={1} miw={0}>
                   <Text className={task.done ? styles.taskDone : styles.taskTitle}>
                     {task.title}
                   </Text>
                   <Text className={styles.taskProject}>{task.project}</Text>
-                </div>
+                </Box>
                 <Badge
                   className={styles.due}
                   color={task.due === 'Today' ? 'orange' : 'gray'}
@@ -198,7 +217,7 @@ export default function Dashboard(): React.ReactElement {
                 >
                   {task.due}
                 </Badge>
-              </div>
+              </Flex>
             ))}
           </Stack>
           <Button
@@ -209,54 +228,75 @@ export default function Dashboard(): React.ReactElement {
             Open task list
           </Button>
         </Card>
-      </section>
+      </Flex>
 
-      <section className={styles.bottomGrid}>
-        <Card className={styles.panel} padding="xl">
-          <Group className={styles.panelHeading} justify="space-between">
-            <div>
+      <Flex
+        className={styles.bottomGrid}
+        component="section"
+        direction={{ base: 'column', md: 'row' }}
+        gap={16}
+      >
+        <Card
+          className={styles.panel}
+          flex={{ base: '0 0 auto', md: '1.08 1 0' }}
+          miw={0}
+          padding="xl"
+        >
+          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+            <Box>
               <Title order={3}>Recent activity</Title>
               <Text className={styles.panelHint}>The latest updates from your team.</Text>
-            </div>
+            </Box>
             <Button className={styles.linkButton} variant="subtle">
               See activity
             </Button>
           </Group>
           <Stack gap="lg">
             {activity.map((item) => (
-              <Group align="flex-start" gap="sm" key={`${item.name}-${item.detail}`}>
+              <Group align="flex-start" gap="sm" key={`${item.name}-${item.detail}`} wrap="nowrap">
                 <Avatar color={item.color} radius="xl">
                   {item.name
                     .split(' ')
                     .map((word) => word[0])
                     .join('')}
                 </Avatar>
-                <div className={styles.activityText}>
-                  <Text>
+                <Box className={styles.activityText} flex={1} miw={0}>
+                  <Text inherit>
                     <strong>{item.name}</strong> {item.action} <span>{item.detail}</span>
                   </Text>
-                  <Text className={styles.time}>
+                  <Group align="center" gap={5} mt={4}>
                     <Clock3 size={12} />
-                    {item.time}
-                  </Text>
-                </div>
+                    <Text className={styles.time}>{item.time}</Text>
+                  </Group>
+                </Box>
               </Group>
             ))}
           </Stack>
         </Card>
-        <Card className={styles.focusCard} padding="xl">
-          <Text className={styles.focusKicker}>Weekly focus</Text>
-          <Title order={3}>Make space for deep work.</Title>
-          <Text>Protect a little time for the work that moves your biggest project forward.</Text>
-          <Button
-            className={styles.focusButton}
-            rightSection={<ArrowUpRight size={16} />}
-            variant="white"
-          >
-            Plan my week
-          </Button>
+        <Card
+          className={styles.focusCard}
+          flex={{ base: '0 0 auto', md: '0.92 1 0' }}
+          miw={{ base: 0, md: 300 }}
+          padding="xl"
+        >
+          <Stack flex={1} gap={0} justify="space-between">
+            <Box>
+              <Text className={styles.focusKicker}>Weekly focus</Text>
+              <Title order={3}>Make space for deep work.</Title>
+              <Text>
+                Protect a little time for the work that moves your biggest project forward.
+              </Text>
+            </Box>
+            <Button
+              className={styles.focusButton}
+              rightSection={<ArrowUpRight size={16} />}
+              variant="white"
+            >
+              Plan my week
+            </Button>
+          </Stack>
         </Card>
-      </section>
-    </div>
+      </Flex>
+    </Box>
   );
 }

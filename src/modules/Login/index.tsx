@@ -1,6 +1,22 @@
 'use client';
 
-import { Anchor, Button, Divider, Paper, PasswordInput, TextInput } from '@mantine/core';
+import {
+  Alert,
+  Anchor,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  Group,
+  PasswordInput,
+  Progress,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+  Title
+} from '@mantine/core';
 import { ArrowUpRight, Check, Github, LogIn } from 'lucide-react';
 import type React from 'react';
 import { useActionState } from 'react';
@@ -12,6 +28,8 @@ import styles from './Login.module.scss';
 type LoginActionState = { error: string | null };
 
 const initialLoginState: LoginActionState = { error: null };
+
+const PREVIEW_TASKS = ['Research notes', 'Prototype review', 'Launch checklist'];
 
 export default function Login(): React.ReactElement {
   const { error: oauthError, loadingProvider, signInWithProvider } = useOAuthWithProvider();
@@ -28,55 +46,95 @@ export default function Login(): React.ReactElement {
   );
 
   return (
-    <main className={styles.page}>
-      <div className={styles.shell}>
-        <section className={styles.intro}>
-          <div className={styles.introTop}>
-            <div className={styles.logo}>
-              <span className={styles.logoMark}>F</span>
-              <span>flowboard</span>
-            </div>
-            <span className={styles.eyebrow}>A clearer way to move work forward</span>
-            <h1>Good work has a rhythm.</h1>
-            <p>One focused home for the projects that matter and the people making them happen.</p>
-          </div>
-          <div className={styles.preview} aria-hidden="true">
-            <div className={styles.previewHeader}>
-              <span>Q3 product launch</span>
+    <Flex align="center" className={styles.page} component="main" justify="center">
+      <Flex className={styles.shell} direction={{ base: 'column', sm: 'row' }}>
+        <Flex
+          className={styles.intro}
+          component="section"
+          direction="column"
+          flex={{ base: '0 0 auto', sm: '1.05 1 0' }}
+          justify="space-between"
+          miw={0}
+        >
+          <Flex align="flex-start" direction="column">
+            <Group className={styles.logo} gap={10}>
+              <Center className={styles.logoMark} component="span">
+                F
+              </Center>
+              <Text component="span" inherit>
+                flowboard
+              </Text>
+            </Group>
+            <Text className={styles.eyebrow} component="span">
+              A clearer way to move work forward
+            </Text>
+            <Title order={1}>Good work has a rhythm.</Title>
+            <Text>
+              One focused home for the projects that matter and the people making them happen.
+            </Text>
+          </Flex>
+
+          <Box aria-hidden="true" className={styles.preview} visibleFrom="sm">
+            <Group className={styles.previewHeader} gap="xs" justify="space-between" wrap="nowrap">
+              <Text component="span" inherit>
+                Q3 product launch
+              </Text>
               <ArrowUpRight size={15} />
-            </div>
-            <div className={styles.progressLine}>
-              <span />
-            </div>
-            <div className={styles.previewMeta}>12 tasks completed this week</div>
-            <div className={styles.previewRows}>
-              {['Research notes', 'Prototype review', 'Launch checklist'].map((task, index) => (
-                <div className={styles.previewRow} key={task}>
-                  <span className={index < 2 ? styles.done : styles.todo}>
+            </Group>
+            <Progress.Root bg="rgba(248, 250, 246, 0.14)" mb={9} mt={18} radius="xl" size={5}>
+              <Progress.Section color="blue.6" value={68} />
+            </Progress.Root>
+            <Text className={styles.previewMeta} component="div">
+              12 tasks completed this week
+            </Text>
+            <Stack className={styles.previewRows} gap={11}>
+              {PREVIEW_TASKS.map((task, index) => (
+                <Group className={styles.previewRow} gap={9} key={task} wrap="nowrap">
+                  <Center
+                    className={index < 2 ? styles.done : styles.todo}
+                    component="span"
+                    flex="0 0 auto"
+                  >
                     {index < 2 ? <Check size={11} /> : null}
-                  </span>
-                  <span>{task}</span>
-                  <small>{index < 2 ? 'Done' : 'Today'}</small>
-                </div>
+                  </Center>
+                  <Text component="span" inherit>
+                    {task}
+                  </Text>
+                  <Text className={styles.previewTag} component="small">
+                    {index < 2 ? 'Done' : 'Today'}
+                  </Text>
+                </Group>
               ))}
-            </div>
-          </div>
-        </section>
+            </Stack>
+          </Box>
+        </Flex>
 
-        <Paper className={styles.formPanel} radius={0} shadow="none">
-          <div className={styles.heading}>
-            <span className={styles.formEyebrow}>Sign in</span>
-            <h2>Welcome back</h2>
-            <p>Sign in to continue to your workspace.</p>
-          </div>
+        <Stack
+          className={styles.formPanel}
+          flex={{ base: '0 0 auto', sm: '0 1 440px' }}
+          gap={0}
+          justify="center"
+          miw={{ base: 0, sm: 360 }}
+        >
+          <Box className={styles.heading}>
+            <Text className={styles.formEyebrow} component="span">
+              Sign in
+            </Text>
+            <Title order={2}>Welcome back</Title>
+            <Text>Sign in to continue to your workspace.</Text>
+          </Box>
 
-          <div className={styles.socialButtons}>
+          <SimpleGrid className={styles.socialButtons} cols={2} mb={26} spacing={10}>
             <Button
-              color="gray"
               className={styles.socialButton}
+              color="gray"
               disabled={loadingProvider !== null}
               fullWidth
-              leftSection={<span className={styles.socialIcon}>G</span>}
+              leftSection={
+                <Text className={styles.socialIcon} component="span">
+                  G
+                </Text>
+              }
               loading={loadingProvider === 'google'}
               onClick={() => signInWithProvider('google')}
               variant="default"
@@ -94,27 +152,27 @@ export default function Login(): React.ReactElement {
             >
               GitHub
             </Button>
-          </div>
+          </SimpleGrid>
 
           <Divider label="or continue with email" labelPosition="center" mb="lg" />
 
-          <form action={loginAction} className={styles.form}>
+          <Flex action={loginAction} component="form" direction="column" gap={16}>
             <TextInput
-              name="email"
-              label="Email address"
               classNames={{ input: styles.input, label: styles.label }}
+              label="Email address"
+              name="email"
               placeholder="you@example.com"
               required
               type="email"
             />
             <PasswordInput
-              name="password"
-              label="Password"
               classNames={{ input: styles.input, label: styles.label }}
+              label="Password"
+              name="password"
               placeholder="Your password"
               required
             />
-            <div className={styles.formActions}>
+            <Group gap={12} justify="space-between" mt={2}>
               <Anchor href="/forgot-password" size="sm">
                 Forgot password?
               </Anchor>
@@ -126,17 +184,19 @@ export default function Login(): React.ReactElement {
               >
                 Sign in
               </Button>
-            </div>
+            </Group>
             {loginState.error || oauthError ? (
-              <div className={styles.error}>{loginState.error ?? oauthError}</div>
+              <Alert color="red" radius="sm" variant="light">
+                {loginState.error ?? oauthError}
+              </Alert>
             ) : null}
-          </form>
+          </Flex>
 
-          <div className={styles.signup}>
+          <Text className={styles.signup}>
             Don&apos;t have an account? <Anchor href={ROUTERS.SIGN_UP}>Create one</Anchor>
-          </div>
-        </Paper>
-      </div>
-    </main>
+          </Text>
+        </Stack>
+      </Flex>
+    </Flex>
   );
 }

@@ -1,4 +1,4 @@
-import { Button, EmptyState, Flex, Text } from '@mantine/core';
+import { Button, EmptyState, Group, Stack, Text } from '@mantine/core';
 import { Mail, RotateCw } from 'lucide-react';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
@@ -46,8 +46,8 @@ function VerifyEmail(): React.ReactElement {
         </>
       }
     >
-      <Flex direction="column" gap="sm" justify="center" align="center">
-        <Flex align={'center'}>
+      <Stack align="center" gap="sm" justify="center">
+        <Group gap={10} justify="center">
           <Button
             disabled={!pendingEmail || cooldown > 0}
             leftSection={<RotateCw size={16} />}
@@ -60,11 +60,11 @@ function VerifyEmail(): React.ReactElement {
           <Button onClick={clearStepActive} variant="subtle">
             Use a different email
           </Button>
-        </Flex>
+        </Group>
         <Text className={styles.hint}>
           Nothing in your inbox? Check the spam folder before resending.
         </Text>
-      </Flex>
+      </Stack>
     </EmptyState>
   );
 }

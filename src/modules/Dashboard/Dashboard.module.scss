@@ -8,13 +8,10 @@
 .stats,
 .contentGrid,
 .bottomGrid {
-    display: grid;
-    gap: 16px;
     max-width: 1440px;
     margin: 0 auto;
 }
 .stats {
-    grid-template-columns: repeat(4, 1fr);
     margin-bottom: 16px;
 }
 .statCard,
@@ -53,14 +50,9 @@
     font-weight: 700;
 }
 .contentGrid {
-    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
     margin-bottom: 16px;
 }
-.bottomGrid {
-    grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
-}
 .panelHeading {
-    align-items: flex-start;
     margin-bottom: 30px;
 }
 .panel h3,
@@ -91,9 +83,6 @@
     background: #edf1ec;
 }
 .insight {
-    display: flex;
-    align-items: center;
-    gap: 9px;
     padding: 12px 14px;
     margin-top: 30px;
     color: #6e817b;
@@ -106,9 +95,6 @@
     color: #50665f;
 }
 .task {
-    display: flex;
-    align-items: center;
-    gap: 11px;
     padding: 14px 0;
     border-bottom: 1px solid #edf1ee;
 }
@@ -120,17 +106,10 @@
 }
 .taskCheck,
 .taskCheckDone {
-    display: grid;
-    flex: 0 0 18px;
-    place-items: center;
     color: #a4b3ae;
 }
 .taskCheckDone {
     color: var(--primary);
-}
-.taskBody {
-    flex: 1;
-    min-width: 0;
 }
 .taskTitle,
 .taskDone {
@@ -152,8 +131,6 @@
     margin-top: 18px;
 }
 .activityText {
-    flex: 1;
-    min-width: 0;
     color: #71837f;
     font-size: 13px;
     line-height: 1.45;
@@ -166,16 +143,7 @@
     color: #52736a;
     font-weight: 600;
 }
-.time {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 4px;
-}
 .focusCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     min-height: 220px;
     color: #f6fbf1;
     background: #173f43;
@@ -208,27 +176,9 @@
     color: #173f43;
     background: #f6fbf1;
 }
-@media (max-width: 1000px) {
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .contentGrid,
-    .bottomGrid {
-        grid-template-columns: 1fr;
-    }
-}
 @media (max-width: 620px) {
     .page {
         padding: 28px 16px;
-    }
-    .header {
-        display: block;
-    }
-    .headerActions {
-        margin-top: 22px;
-    }
-    .stats {
-        grid-template-columns: 1fr 1fr;
     }
     .statCard {
         padding: 14px;

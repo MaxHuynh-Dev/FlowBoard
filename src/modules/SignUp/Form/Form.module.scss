@@ -26,13 +26,6 @@
   font-size: 14px;
 }
 
-.socialButtons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 26px;
-}
-
 .socialButton {
   height: 44px;
   color: #123238;
@@ -43,12 +36,6 @@
 .socialIcon {
   font-size: 17px;
   font-weight: 800;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }
 
 .label {
@@ -64,23 +51,6 @@
   border-radius: 7px;
 }
 
-.formActions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 2px;
-}
-
-.success {
-  padding: 10px 12px;
-  color: #315e3b;
-  font-size: 13px;
-  background: #eef8e7;
-  border: 1px solid #cde6bd;
-  border-radius: 6px;
-}
-
 .submit {
   height: 44px;
   color: #fff;
@@ -93,43 +63,8 @@
   background: #228be6;
 }
 
-.signup {
-  margin-top: 28px;
-  color: #687975;
-  font-size: 13px;
-  text-align: center;
-}
-
-@media (max-width: 760px) {
-  .page {
-    min-height: 100vh;
-    padding: 24px 16px;
-  }
-
-  .shell {
-    display: block;
-  }
-
-  .intro {
-    min-height: auto;
-    padding: 32px 28px;
-  }
-
-  .logo {
-    margin-bottom: 42px;
-  }
-
-  .preview {
-    display: none;
-  }
-
-  .formPanel {
-    padding: 32px 24px;
-  }
-}
-
 @media (max-width: 380px) {
   .socialButtons {
-    grid-template-columns: 1fr;
+    --sg-cols: 1;
   }
 }

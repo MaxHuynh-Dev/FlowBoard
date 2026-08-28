@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Stepper, Text } from '@mantine/core';
+import { Center, Flex, Group, Stack, Stepper, Text, Title } from '@mantine/core';
 import { AnimatePresence, motion } from 'framer-motion';
 import type React from 'react';
 import { useEffect, useState } from 'react';
@@ -39,18 +39,31 @@ export default function SignUp(): React.ReactElement {
   }, []);
 
   return (
-    <main className={styles.page}>
-      <div className={styles.shell}>
-        <section className={styles.intro}>
-          <Box className={styles.introTop}>
-            <Box className={styles.logo}>
-              <span className={styles.logoMark}>F</span>
-              <span>flowboard</span>
-            </Box>
-            <span className={styles.eyebrow}>A clearer way to move work forward</span>
-            <h1>Start your best work here.</h1>
+    <Flex align="center" className={styles.page} component="main" justify="center">
+      <Flex className={styles.shell} direction={{ base: 'column', sm: 'row' }}>
+        <Flex
+          className={styles.intro}
+          component="section"
+          direction="column"
+          flex={{ base: '0 0 auto', sm: '1 1 0' }}
+          justify="space-between"
+          miw={0}
+        >
+          <Flex align="flex-start" direction="column" mb={40}>
+            <Group className={styles.logo} gap={10}>
+              <Center className={styles.logoMark} component="span">
+                F
+              </Center>
+              <Text component="span" inherit>
+                flowboard
+              </Text>
+            </Group>
+            <Text className={styles.eyebrow} component="span">
+              A clearer way to move work forward
+            </Text>
+            <Title order={1}>Start your best work here.</Title>
             <Text>Create a focused home for your projects, tasks, and team conversations.</Text>
-          </Box>
+          </Flex>
           <Stepper
             active={stepActive}
             allowNextStepsSelect={false}
@@ -66,9 +79,15 @@ export default function SignUp(): React.ReactElement {
               />
             ))}
           </Stepper>
-        </section>
+        </Flex>
 
-        <Box className={styles.formPanel}>
+        <Stack
+          className={styles.formPanel}
+          flex={{ base: '0 0 auto', sm: '1.5 1 0' }}
+          gap={0}
+          justify="center"
+          miw={0}
+        >
           <AnimatePresence mode="wait">
             {hydrated &&
               STEPPERS.map(
@@ -86,8 +105,8 @@ export default function SignUp(): React.ReactElement {
                   )
               )}
           </AnimatePresence>
-        </Box>
-      </div>
-    </main>
+        </Stack>
+      </Flex>
+    </Flex>
   );
 }
