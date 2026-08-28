@@ -1,0 +1,76 @@
+.heading {
+  margin-bottom: 30px;
+}
+
+.formEyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #687975;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin: 0 0 9px;
+  color: #123238;
+  font-family: var(--font-raleway);
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.heading p {
+  margin: 0;
+  color: #687975;
+  font-size: 14px;
+}
+
+.label {
+  color: #29433f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input {
+  height: 44px;
+  color: #000;
+  border-color: #dce3de;
+  border-radius: 7px;
+}
+
+.hint {
+  color: #687975;
+  font-size: 13px;
+  background: #f4f7f3;
+}
+
+.submit {
+  height: 44px;
+  color: #fff;
+  background: #228be6;
+  border: 0;
+  border-radius: 7px;
+}
+
+.submit:hover {
+  background: #1c7ed6;
+}
+
+.backLink {
+  color: #52736a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.footerActions svg {
+  vertical-align: -2px;
+  margin-right: 5px;
+}
+
+.signup {
+  margin-top: 14px;
+  color: #687975;
+  font-size: 13px;
+  text-align: center;
+}

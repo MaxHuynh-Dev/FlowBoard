@@ -173,7 +173,7 @@ export default function Login(): React.ReactElement {
               required
             />
             <Group gap={12} justify="space-between" mt={2}>
-              <Anchor href="/forgot-password" size="sm">
+              <Anchor href={ROUTERS.FORGOT_PASSWORD} size="sm">
                 Forgot password?
               </Anchor>
               <Button

@@ -1,0 +1,4 @@
+export enum FORGOT_PASSWORD_STEP {
+  REQUEST_LINK = 0,
+  SET_NEW_PASSWORD = 1
+}
