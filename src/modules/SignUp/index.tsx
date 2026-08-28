@@ -45,7 +45,7 @@ export default function SignUp(): React.ReactElement {
           className={styles.intro}
           component="section"
           direction="column"
-          flex={{ base: '0 0 auto', sm: '1 1 0' }}
+          flex={{ base: '0 0 auto', sm: '1 1 40%' }}
           justify="space-between"
           miw={0}
         >
@@ -83,7 +83,7 @@ export default function SignUp(): React.ReactElement {
 
         <Stack
           className={styles.formPanel}
-          flex={{ base: '0 0 auto', sm: '1.5 1 0' }}
+          flex={{ base: '0 0 auto', sm: '1.5 1 60%' }}
           gap={0}
           justify="center"
           miw={0}

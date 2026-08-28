@@ -5,28 +5,16 @@
     border-top: 1px solid #e1e8e2;
 }
 .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
     color: #123238;
     font-size: 17px;
     font-weight: 750;
     text-decoration: none;
 }
 .brandMark {
-    display: grid;
     width: 30px;
     height: 30px;
     color: #123238;
     background: var(--primary);
     border-radius: 8px;
-    place-items: center;
     transform: rotate(-6deg);
-}
-@media (max-width: 650px) {
-    .footer :global(.mantine-Group-root) {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 15px;
-    }
 }

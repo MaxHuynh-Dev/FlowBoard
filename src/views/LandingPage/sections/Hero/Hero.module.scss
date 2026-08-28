@@ -13,12 +13,6 @@
     content: "";
     background: rgba(24, 59, 64, 0.06);
 }
-.heroGrid {
-    display: grid;
-    grid-template-columns: minmax(300px, 0.83fr) minmax(500px, 1.17fr);
-    align-items: center;
-    gap: 64px;
-}
 .heroBadge {
     color: #52736a;
     background: #e9f4d0;
@@ -44,12 +38,8 @@
     margin-top: 30px;
 }
 .heroCta {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
     height: 46px;
     padding: 0 18px;
-    color: #17383d;
     font-size: 13px;
     background: var(--primary);
     border: 0;
@@ -63,12 +53,10 @@
 }
 .noCard {
     margin-top: 18px;
-    color: #8a9b95;
     font-size: 11px;
 }
 .noCard span {
     margin: 0 7px;
-    color: #c2cec8;
 }
 .dashboardFrame {
     position: relative;
@@ -80,9 +68,6 @@
     transform: rotate(1.5deg);
 }
 .windowBar {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     height: 34px;
     padding: 0 13px;
     background: #e7ece6;
@@ -100,32 +85,25 @@
     font-size: 9px;
 }
 .dashboardPreview {
-    display: grid;
-    grid-template-columns: 142px 1fr;
     min-height: 388px;
     background: #f6f8f4;
 }
 .miniSidebar {
+    width: 142px;
     padding: 18px 12px;
     color: #dfe9df;
     background: #123238;
 }
 .miniBrand {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     margin-bottom: 35px;
     font-size: 11px;
     font-weight: 700;
 }
-.miniBrand span {
-    display: grid;
+.miniBrandMark {
     width: 19px;
     height: 19px;
-    color: #123238;
     background: var(--primary);
     border-radius: 5px;
-    place-items: center;
 }
 .miniWorkspace {
     margin-bottom: 12px;
@@ -135,17 +113,12 @@
 }
 .miniLink,
 .miniLinkActive {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     padding: 8px 6px;
     margin-bottom: 4px;
-    color: #9bb0aa;
     font-size: 9px;
     border-radius: 4px;
 }
 .miniLinkActive {
-    color: #f5f9ef;
     background: rgba(var(--primary-rgb), 0.15);
 }
 .miniMain {
@@ -165,17 +138,10 @@
     color: var(--primary);
 }
 .miniButton {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: #17383d;
     background: var(--primary);
     border: 0;
 }
 .miniStats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 9px;
     margin: 28px 0 16px;
 }
 .miniStat {
@@ -208,11 +174,7 @@
     color: #45625d;
     font-size: 9px;
 }
-@media (max-width: 900px) {
-    .heroGrid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
+@media (max-width: 61.9375em) {
     .heroCopy,
     .dashboardFrame {
         max-width: 720px;
@@ -228,15 +190,15 @@
     .dashboardFrame {
         transform: none;
     }
+    .miniSidebar {
+        width: 100px;
+        padding: 13px 8px;
+    }
     .dashboardPreview {
-        grid-template-columns: 100px 1fr;
         min-height: 310px;
     }
     .miniMain {
         padding: 17px 13px;
-    }
-    .miniSidebar {
-        padding: 13px 8px;
     }
     .miniStats {
         margin-top: 18px;

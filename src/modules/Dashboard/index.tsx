@@ -7,6 +7,8 @@ import {
   Card,
   Center,
   Flex,
+  Grid,
+  GridCol,
   Group,
   Progress,
   RingProgress,
@@ -125,178 +127,167 @@ export default function Dashboard(): React.ReactElement {
         </SimpleGrid>
       </Box>
 
-      <Flex
-        className={styles.contentGrid}
-        component="section"
-        direction={{ base: 'column', md: 'row' }}
-        gap={16}
-      >
-        <Card
-          className={styles.panel}
-          flex={{ base: '0 0 auto', md: '1.08 1 0' }}
-          miw={0}
-          padding="xl"
-        >
-          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
-            <Box>
-              <Title order={3}>Project pulse</Title>
-              <Text className={styles.panelHint}>Keep an eye on your team&apos;s momentum.</Text>
-            </Box>
-            <Button
-              className={styles.linkButton}
-              rightSection={<ArrowUpRight size={15} />}
-              variant="subtle"
-            >
-              View all
-            </Button>
-          </Group>
-          <Stack gap="xl">
-            {projects.map((project) => (
-              <Box key={project.name}>
-                <Group justify="space-between" mb={8}>
-                  <Box>
-                    <Text className={styles.projectName}>{project.name}</Text>
-                    <Text className={styles.projectTeam}>{project.team}</Text>
-                  </Box>
-                  <Text className={styles.percent}>{project.progress}%</Text>
-                </Group>
-                <Progress
-                  className={styles.progress}
-                  color={project.tone}
-                  size="sm"
-                  value={project.progress}
-                />
-              </Box>
-            ))}
-          </Stack>
-          <Group align="center" className={styles.insight} gap={9} wrap="nowrap">
-            <ThemeIcon color="yellow" radius="xl" size="sm" variant="light">
-              <Sparkles size={14} />
-            </ThemeIcon>
-            <Text inherit>
-              <strong>Nice pace.</strong> Your team is ahead of schedule on 4 projects.
-            </Text>
-          </Group>
-        </Card>
-
-        <Card
-          className={styles.panel}
-          flex={{ base: '0 0 auto', md: '0.92 1 0' }}
-          miw={{ base: 0, md: 360 }}
-          padding="xl"
-        >
-          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
-            <Box>
-              <Title order={3}>My tasks</Title>
-              <Text className={styles.panelHint}>4 tasks need your attention.</Text>
-            </Box>
-            <ActionIcon aria-label="Open task calendar" variant="default">
-              <CalendarDays size={17} />
-            </ActionIcon>
-          </Group>
-          <Stack gap={0}>
-            {tasks.map((task) => (
-              <Flex align="center" className={styles.task} gap={11} key={task.title}>
-                <Center
-                  className={task.done ? styles.taskCheckDone : styles.taskCheck}
-                  component="span"
-                  flex="0 0 18px"
-                >
-                  <CircleDashed size={17} />
-                </Center>
-                <Box flex={1} miw={0}>
-                  <Text className={task.done ? styles.taskDone : styles.taskTitle}>
-                    {task.title}
+      <Box component="section">
+        <Grid className={styles.contentGrid} columns={50} gap={16}>
+          <GridCol span={{ base: 50, md: 27 }}>
+            <Card className={styles.panel} h="100%" padding="xl">
+              <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+                <Box>
+                  <Title order={3}>Project pulse</Title>
+                  <Text className={styles.panelHint}>
+                    Keep an eye on your team&apos;s momentum.
                   </Text>
-                  <Text className={styles.taskProject}>{task.project}</Text>
                 </Box>
-                <Badge
-                  className={styles.due}
-                  color={task.due === 'Today' ? 'orange' : 'gray'}
-                  variant="light"
+                <Button
+                  className={styles.linkButton}
+                  rightSection={<ArrowUpRight size={15} />}
+                  variant="subtle"
                 >
-                  {task.due}
-                </Badge>
-              </Flex>
-            ))}
-          </Stack>
-          <Button
-            className={styles.fullLink}
-            rightSection={<ChevronRight size={15} />}
-            variant="subtle"
-          >
-            Open task list
-          </Button>
-        </Card>
-      </Flex>
-
-      <Flex
-        className={styles.bottomGrid}
-        component="section"
-        direction={{ base: 'column', md: 'row' }}
-        gap={16}
-      >
-        <Card
-          className={styles.panel}
-          flex={{ base: '0 0 auto', md: '1.08 1 0' }}
-          miw={0}
-          padding="xl"
-        >
-          <Group align="flex-start" className={styles.panelHeading} justify="space-between">
-            <Box>
-              <Title order={3}>Recent activity</Title>
-              <Text className={styles.panelHint}>The latest updates from your team.</Text>
-            </Box>
-            <Button className={styles.linkButton} variant="subtle">
-              See activity
-            </Button>
-          </Group>
-          <Stack gap="lg">
-            {activity.map((item) => (
-              <Group align="flex-start" gap="sm" key={`${item.name}-${item.detail}`} wrap="nowrap">
-                <Avatar color={item.color} radius="xl">
-                  {item.name
-                    .split(' ')
-                    .map((word) => word[0])
-                    .join('')}
-                </Avatar>
-                <Box className={styles.activityText} flex={1} miw={0}>
-                  <Text inherit>
-                    <strong>{item.name}</strong> {item.action} <span>{item.detail}</span>
-                  </Text>
-                  <Group align="center" gap={5} mt={4}>
-                    <Clock3 size={12} />
-                    <Text className={styles.time}>{item.time}</Text>
-                  </Group>
-                </Box>
+                  View all
+                </Button>
               </Group>
-            ))}
-          </Stack>
-        </Card>
-        <Card
-          className={styles.focusCard}
-          flex={{ base: '0 0 auto', md: '0.92 1 0' }}
-          miw={{ base: 0, md: 300 }}
-          padding="xl"
-        >
-          <Stack flex={1} gap={0} justify="space-between">
-            <Box>
-              <Text className={styles.focusKicker}>Weekly focus</Text>
-              <Title order={3}>Make space for deep work.</Title>
-              <Text>
-                Protect a little time for the work that moves your biggest project forward.
-              </Text>
-            </Box>
-            <Button
-              className={styles.focusButton}
-              rightSection={<ArrowUpRight size={16} />}
-              variant="white"
-            >
-              Plan my week
-            </Button>
-          </Stack>
-        </Card>
-      </Flex>
+              <Stack gap="xl">
+                {projects.map((project) => (
+                  <Box key={project.name}>
+                    <Group justify="space-between" mb={8}>
+                      <Box>
+                        <Text className={styles.projectName}>{project.name}</Text>
+                        <Text className={styles.projectTeam}>{project.team}</Text>
+                      </Box>
+                      <Text className={styles.percent}>{project.progress}%</Text>
+                    </Group>
+                    <Progress
+                      className={styles.progress}
+                      color={project.tone}
+                      size="sm"
+                      value={project.progress}
+                    />
+                  </Box>
+                ))}
+              </Stack>
+              <Group align="center" className={styles.insight} gap={9} wrap="nowrap">
+                <ThemeIcon color="yellow" radius="xl" size="sm" variant="light">
+                  <Sparkles size={14} />
+                </ThemeIcon>
+                <Text inherit>
+                  <strong>Nice pace.</strong> Your team is ahead of schedule on 4 projects.
+                </Text>
+              </Group>
+            </Card>
+          </GridCol>
+
+          <GridCol span={{ base: 50, md: 23 }}>
+            <Card className={styles.panel} h="100%" padding="xl">
+              <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+                <Box>
+                  <Title order={3}>My tasks</Title>
+                  <Text className={styles.panelHint}>4 tasks need your attention.</Text>
+                </Box>
+                <ActionIcon aria-label="Open task calendar" variant="default">
+                  <CalendarDays size={17} />
+                </ActionIcon>
+              </Group>
+              <Stack gap={0}>
+                {tasks.map((task) => (
+                  <Flex align="center" className={styles.task} gap={11} key={task.title}>
+                    <Center
+                      className={task.done ? styles.taskCheckDone : styles.taskCheck}
+                      component="span"
+                      flex="0 0 18px"
+                    >
+                      <CircleDashed size={17} />
+                    </Center>
+                    <Box flex={1} miw={0}>
+                      <Text className={task.done ? styles.taskDone : styles.taskTitle}>
+                        {task.title}
+                      </Text>
+                      <Text className={styles.taskProject}>{task.project}</Text>
+                    </Box>
+                    <Badge
+                      className={styles.due}
+                      color={task.due === 'Today' ? 'orange' : 'gray'}
+                      variant="light"
+                    >
+                      {task.due}
+                    </Badge>
+                  </Flex>
+                ))}
+              </Stack>
+              <Button
+                className={styles.fullLink}
+                rightSection={<ChevronRight size={15} />}
+                variant="subtle"
+              >
+                Open task list
+              </Button>
+            </Card>
+          </GridCol>
+        </Grid>
+      </Box>
+
+      <Box component="section">
+        <Grid className={styles.bottomGrid} columns={50} gap={16}>
+          <GridCol span={{ base: 50, md: 27 }}>
+            <Card className={styles.panel} h="100%" padding="xl">
+              <Group align="flex-start" className={styles.panelHeading} justify="space-between">
+                <Box>
+                  <Title order={3}>Recent activity</Title>
+                  <Text className={styles.panelHint}>The latest updates from your team.</Text>
+                </Box>
+                <Button className={styles.linkButton} variant="subtle">
+                  See activity
+                </Button>
+              </Group>
+              <Stack gap="lg">
+                {activity.map((item) => (
+                  <Group
+                    align="flex-start"
+                    gap="sm"
+                    key={`${item.name}-${item.detail}`}
+                    wrap="nowrap"
+                  >
+                    <Avatar color={item.color} radius="xl">
+                      {item.name
+                        .split(' ')
+                        .map((word) => word[0])
+                        .join('')}
+                    </Avatar>
+                    <Box className={styles.activityText} flex={1} miw={0}>
+                      <Text inherit>
+                        <strong>{item.name}</strong> {item.action} <span>{item.detail}</span>
+                      </Text>
+                      <Group align="center" gap={5} mt={4}>
+                        <Clock3 size={12} />
+                        <Text className={styles.time}>{item.time}</Text>
+                      </Group>
+                    </Box>
+                  </Group>
+                ))}
+              </Stack>
+            </Card>
+          </GridCol>
+          <GridCol span={{ base: 50, md: 23 }}>
+            <Card className={styles.focusCard} h="100%" padding="xl">
+              <Stack flex={1} gap={0} justify="space-between">
+                <Box>
+                  <Text className={styles.focusKicker}>Weekly focus</Text>
+                  <Title order={3}>Make space for deep work.</Title>
+                  <Text>
+                    Protect a little time for the work that moves your biggest project forward.
+                  </Text>
+                </Box>
+                <Button
+                  className={styles.focusButton}
+                  rightSection={<ArrowUpRight size={16} />}
+                  variant="white"
+                >
+                  Plan my week
+                </Button>
+              </Stack>
+            </Card>
+          </GridCol>
+        </Grid>
+      </Box>
     </Box>
   );
 }
