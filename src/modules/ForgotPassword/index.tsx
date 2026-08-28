@@ -2,6 +2,7 @@
 
 import { Center, Flex, Group, Stack, Stepper, Text, Title } from '@mantine/core';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 import type React from 'react';
 import { useState } from 'react';
 import { FORGOT_PASSWORD_STEP } from '@/enums/forgotPasswordStep';
@@ -23,8 +24,11 @@ const STEPPERS = [
 ];
 
 export default function ForgotPassword(): React.ReactElement {
+  const queryParams = useSearchParams();
   const [stepActive, setStepActive] = useState<FORGOT_PASSWORD_STEP>(
-    FORGOT_PASSWORD_STEP.REQUEST_LINK
+    queryParams.get('step') === `${FORGOT_PASSWORD_STEP.SET_NEW_PASSWORD}`
+      ? FORGOT_PASSWORD_STEP.SET_NEW_PASSWORD
+      : FORGOT_PASSWORD_STEP.REQUEST_LINK
   );
 
   return (

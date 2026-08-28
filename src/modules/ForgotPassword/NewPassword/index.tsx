@@ -1,3 +1,4 @@
+'use client';
 import {
   Anchor,
   Box,
@@ -10,10 +11,14 @@ import {
   Text,
   Title
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { ArrowLeft, Check, KeyRound, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import type React from 'react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { ROUTERS } from '@/enums/router';
+import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import { REQUIREMENTS, STRENGTH_TONES } from '@/utils/global';
 import styles from './NewPassword.module.scss';
 
@@ -25,6 +30,27 @@ function NewPassword({ onBack }: Props): React.ReactElement {
   const [password, setPassword] = useState('');
   const metCount = REQUIREMENTS.filter((requirement) => requirement.test(password)).length;
   const strength = STRENGTH_TONES[metCount];
+  const router = useRouter();
+  const [loading, { toggle }] = useDisclosure();
+  const { handleResetPasswordForEmail } = useAuthEmailProvider();
+
+  function handleSubmitForm() {
+    toggle();
+
+    if (password) {
+      toast.warning('Please type your password');
+    }
+
+    handleResetPasswordForEmail(password, () => {
+      toast.success('Cập nhật mật khẩu thành công! Đang chuyển hướng...', {
+        delay: 2000
+      });
+      setTimeout(() => {
+        router.push(ROUTERS.LOGIN);
+        toggle();
+      }, 1000);
+    });
+  }
 
   return (
     <Box>
@@ -40,7 +66,10 @@ function NewPassword({ onBack }: Props): React.ReactElement {
         component="form"
         direction="column"
         gap={16}
-        onSubmit={(event) => event.preventDefault()}
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSubmitForm();
+        }}
       >
         <PasswordInput
           classNames={{ input: styles.input, label: styles.label }}
@@ -93,6 +122,7 @@ function NewPassword({ onBack }: Props): React.ReactElement {
         <Button
           className={styles.submit}
           fullWidth
+          loading={loading}
           leftSection={<KeyRound size={16} />}
           type="submit"
         >

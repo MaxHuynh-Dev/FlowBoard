@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { FORGOT_PASSWORD_STEP } from '@/enums/forgotPasswordStep';
 import { ROUTERS } from '@/enums/router';
 import { buildVerifyEmailRedirect, SIGN_UP_STEP } from '@/enums/signUpStep';
 import { useStatusSignUpStore } from '@/stores/statusSignUpStore';
@@ -19,6 +20,14 @@ type UseAuthEmailProvider = {
   ) => Promise<{ error: string | null; success: string | null }>;
   handleResendVerifyEmail: (email: string) => Promise<{ error: string | null }>;
   handleLogout: () => Promise<{ error: string | null }>;
+  handleSendEmailResetPassword: (
+    email: string,
+    callback: () => void
+  ) => Promise<{ error: string | null }>;
+  handleResetPasswordForEmail: (
+    password: string,
+    callback: () => void
+  ) => Promise<{ error: string | null }>;
 };
 
 const useAuthEmailProvider = (): UseAuthEmailProvider => {
@@ -104,7 +113,6 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
       await supabase.auth.signOut();
       window.location.href = ROUTERS.LOGIN;
       clearUser();
-
       return { error: null };
     } catch (error) {
       console.error('Error logging out:', error);
@@ -112,7 +120,45 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
     }
   };
 
-  return { handleLogin, handleSignUp, handleResendVerifyEmail, handleLogout };
+  const handleSendEmailResetPassword = async (email: string, callback: () => void) => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}${ROUTERS.FORGOT_PASSWORD}?step=${FORGOT_PASSWORD_STEP.SET_NEW_PASSWORD}`
+    });
+
+    if (error) {
+      toast.error(error.message);
+      callback();
+      return { error: error.message };
+    }
+
+    toast.success('Verification email sent again.');
+    callback();
+    return { error: null };
+  };
+
+  const handleResetPasswordForEmail = async (password: string, callback: () => void) => {
+    const { error } = await supabase.auth.updateUser({
+      password: password
+    });
+
+    if (error) {
+      toast.error(`Error update: ${error.message}`);
+      return { error: error.message };
+    } else {
+      callback();
+    }
+
+    return { error: null };
+  };
+
+  return {
+    handleLogin,
+    handleSignUp,
+    handleResendVerifyEmail,
+    handleLogout,
+    handleSendEmailResetPassword,
+    handleResetPasswordForEmail
+  };
 };
 
 export default useAuthEmailProvider;

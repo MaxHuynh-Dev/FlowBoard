@@ -1,7 +1,9 @@
 import { Alert, Anchor, Box, Button, Flex, Group, Text, TextInput, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { ArrowLeft, Info, Mail } from 'lucide-react';
-import type React from 'react';
+import React from 'react';
 import { ROUTERS } from '@/enums/router';
+import useAuthEmailProvider from '@/hooks/useAuthEmailProvider';
 import styles from './RequestLink.module.scss';
 
 type Props = {
@@ -9,6 +11,10 @@ type Props = {
 };
 
 function RequestLink({ onSubmitted }: Props): React.ReactElement {
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const { handleSendEmailResetPassword } = useAuthEmailProvider();
+  const [loading, { toggle }] = useDisclosure();
+
   return (
     <Box>
       <Box className={styles.heading}>
@@ -27,7 +33,10 @@ function RequestLink({ onSubmitted }: Props): React.ReactElement {
         gap={16}
         onSubmit={(event) => {
           event.preventDefault();
-          onSubmitted();
+          toggle();
+          handleSendEmailResetPassword(emailRef.current?.value || '', () => {
+            onSubmitted();
+          });
         }}
       >
         <TextInput
@@ -37,6 +46,7 @@ function RequestLink({ onSubmitted }: Props): React.ReactElement {
           placeholder="you@example.com"
           required
           type="email"
+          ref={emailRef}
         />
 
         <Alert
@@ -49,7 +59,13 @@ function RequestLink({ onSubmitted }: Props): React.ReactElement {
           The link stays valid for 60 minutes. If it expires, just request a new one.
         </Alert>
 
-        <Button className={styles.submit} fullWidth leftSection={<Mail size={16} />} type="submit">
+        <Button
+          loading={loading}
+          className={styles.submit}
+          fullWidth
+          leftSection={<Mail size={16} />}
+          type="submit"
+        >
           Send reset link
         </Button>
       </Flex>
