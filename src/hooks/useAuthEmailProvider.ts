@@ -121,7 +121,7 @@ const useAuthEmailProvider = (): UseAuthEmailProvider => {
   };
 
   const handleSendEmailResetPassword = async (email: string, callback: () => void) => {
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}${ROUTERS.FORGOT_PASSWORD}?step=${FORGOT_PASSWORD_STEP.SET_NEW_PASSWORD}`
     });
 
