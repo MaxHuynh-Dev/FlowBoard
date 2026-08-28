@@ -14,25 +14,10 @@ import { ArrowLeft, Check, KeyRound, X } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
 import { ROUTERS } from '@/enums/router';
+import { REQUIREMENTS, STRENGTH_TONES } from '@/utils/global';
 import styles from './NewPassword.module.scss';
 
-const REQUIREMENTS: Array<{ label: string; test: (value: string) => boolean }> = [
-  { label: 'At least 8 characters', test: (value) => value.length >= 8 },
-  { label: 'One uppercase letter', test: (value) => /[A-Z]/.test(value) },
-  { label: 'One number', test: (value) => /\d/.test(value) },
-  { label: 'One special character', test: (value) => /[^A-Za-z0-9]/.test(value) }
-];
-
-const STRENGTH_TONES = [
-  { label: 'Too weak', color: 'red' },
-  { label: 'Weak', color: 'orange' },
-  { label: 'Fair', color: 'yellow' },
-  { label: 'Good', color: 'lime' },
-  { label: 'Strong', color: 'teal' }
-];
-
 type Props = {
-  /** UI only — returns to step 1. */
   onBack: () => void;
 };
 

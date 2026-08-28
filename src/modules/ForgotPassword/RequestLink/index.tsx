@@ -5,7 +5,6 @@ import { ROUTERS } from '@/enums/router';
 import styles from './RequestLink.module.scss';
 
 type Props = {
-  /** UI only — advances the stepper. Wire the real request here later. */
   onSubmitted: () => void;
 };
 
